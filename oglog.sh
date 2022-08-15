@@ -68,21 +68,21 @@ function show_pieces_menu() {
 }
 
 function show_color_menu() {
-    local RESTORE='\033[0m'
-    local RED='\033[00;31m';
-    local GREEN='\033[00;32m';
-    local YELLOW='\033[00;33m';
-    local BLUE='\033[00;34m';
-    local PURPLE='\033[00;35m';
-    local CYAN='\033[00;36m';
-    local LGRAY='\033[00;37m';
-    local LRED='\033[01;31m';
-    local LGREEN='\033[01;32m';
-    local LYELLOW='\033[01;33m';
-    local LBLUE='\033[01;34m';
-    local LPURPLE='\033[01;35m';
-    local LCYAN='\033[01;36m';
-    local WHITE='\033[01;37m';
+    local RESTORE="\033[0m";
+    local RED=("1" "\033[00;31m");
+    local GREEN=("2" "\033[00;32m");
+    local YELLOW=("3" "\033[00;33m");
+    local BLUE=("4" "\033[00;34m");
+    local PURPLE=("5" "\033[00;35m");
+    local CYAN=("6" "\033[00;36m");
+    local LGRAY=("7" "\033[00;37m");
+    local LRED=("8" "\033[01;31m");
+    local LGREEN=("9" "\033[01;32m");
+    local LYELLOW=("10" "\033[01;33m");
+    local LBLUE=("11" "\033[01;34m");
+    local LPURPLE=("12" "\033[01;35m");
+    local LCYAN=("13" "\033[01;36m");
+    local WHITE=("14" "\033[01;37m");
 
     echo -e "1. ${RED}RED";
     echo -e "2. ${GREEN}GREEN";
