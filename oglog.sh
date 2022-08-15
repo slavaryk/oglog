@@ -10,7 +10,7 @@ function start_oglog() {
     while [ "$MENU_CHOISE" != "$EXIT" ];
         do
             show_main_menu;
-            read -p $'\nTell me what you want\n' MENU_CHOISE;
+            read -p $'\nTell me what you want, what you realy realy want?\n' MENU_CHOISE;
             handle_main_menu_choice $MENU_CHOISE;
         done
 }
@@ -46,9 +46,7 @@ function build_git_log_alias() {
     while [ "$MENU_CHOISE" != "$EXIT" ];
         do
             show_pieces_menu;
-            read -p $'
-                \nWhat you want to see in your git log!\n
-            ' MENU_CHOISE;
+            read -p $'\nWhat you want to see in your git log?\n' MENU_CHOISE;
             handle_piece_choice $MENU_CHOISE;
         done
 }
@@ -69,6 +67,48 @@ function show_pieces_menu() {
     echo $'13. Back';
 }
 
+function show_color_menu() {
+    local RESTORE='\033[0m'
+    local RED='\033[00;31m';
+    local GREEN='\033[00;32m';
+    local YELLOW='\033[00;33m';
+    local BLUE='\033[00;34m';
+    local PURPLE='\033[00;35m';
+    local CYAN='\033[00;36m';
+    local LGRAY='\033[00;37m';
+    local LRED='\033[01;31m';
+    local LGREEN='\033[01;32m';
+    local LYELLOW='\033[01;33m';
+    local LBLUE='\033[01;34m';
+    local LPURPLE='\033[01;35m';
+    local LCYAN='\033[01;36m';
+    local WHITE='\033[01;37m';
+
+    echo -e "1. ${RED}RED";
+    echo -e "2. ${GREEN}GREEN";
+    echo -e "3. ${YELLOW}YELLOW";
+    echo -e "4. ${BLUE}BLUE";
+    echo -e "5. ${PURPLE}PURPLE";
+    echo -e "6. ${CYAN}CYAN";
+    echo -e "7. ${LGRAY}LIGHT GRAY";
+    echo -e "8. ${LRED}LIGHT RED";
+    echo -e "9. ${LGREEN}LIGHT GREEN";
+    echo -e "10. ${LYELLOW}LIGHT YELLOW";
+    echo -e "11. ${LBLUE}LIGHT BLUE";
+    echo -e "12. ${LPURPLE}LIGHT PURPLE";
+    echo -e "13. ${LCYAN}LIGHT CYAN";
+    echo -e "14. ${WHITE}WHITE";
+    echo -e "${RESTORE}"
+
+    read -p $'\nWhat color?\n' MENU_CHOISE;
+
+    return $1+="${}"
+}
+
+function add_color_to_piece() {
+    show_color_menu;
+}
+
 function handle_piece_choice() {
     local COMMIT_HASH=("1" "%h");
     local TREE_HASH=("2" "%t");
@@ -86,6 +126,7 @@ function handle_piece_choice() {
     case $1 in
     ${COMMIT_HASH[0]})
         GIT_LOG_ALIAS_PIECE+="${COMMIT_HASH[1]}";
+        add_color_to_piece;
         echo "$GIT_LOG_ALIAS_PIECE";
         ;;
     ${TREE_HASH[0]})
