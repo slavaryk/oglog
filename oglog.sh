@@ -67,48 +67,6 @@ function show_pieces_menu() {
     echo $'13. Back';
 }
 
-function show_color_menu() {
-    local RESTORE="\033[0m";
-    local RED=("1" "\033[00;31m");
-    local GREEN=("2" "\033[00;32m");
-    local YELLOW=("3" "\033[00;33m");
-    local BLUE=("4" "\033[00;34m");
-    local PURPLE=("5" "\033[00;35m");
-    local CYAN=("6" "\033[00;36m");
-    local LGRAY=("7" "\033[00;37m");
-    local LRED=("8" "\033[01;31m");
-    local LGREEN=("9" "\033[01;32m");
-    local LYELLOW=("10" "\033[01;33m");
-    local LBLUE=("11" "\033[01;34m");
-    local LPURPLE=("12" "\033[01;35m");
-    local LCYAN=("13" "\033[01;36m");
-    local WHITE=("14" "\033[01;37m");
-
-    echo -e "1. ${RED}RED";
-    echo -e "2. ${GREEN}GREEN";
-    echo -e "3. ${YELLOW}YELLOW";
-    echo -e "4. ${BLUE}BLUE";
-    echo -e "5. ${PURPLE}PURPLE";
-    echo -e "6. ${CYAN}CYAN";
-    echo -e "7. ${LGRAY}LIGHT GRAY";
-    echo -e "8. ${LRED}LIGHT RED";
-    echo -e "9. ${LGREEN}LIGHT GREEN";
-    echo -e "10. ${LYELLOW}LIGHT YELLOW";
-    echo -e "11. ${LBLUE}LIGHT BLUE";
-    echo -e "12. ${LPURPLE}LIGHT PURPLE";
-    echo -e "13. ${LCYAN}LIGHT CYAN";
-    echo -e "14. ${WHITE}WHITE";
-    echo -e "${RESTORE}"
-
-    read -p $'\nWhat color?\n' MENU_CHOISE;
-
-    return $1+="${}"
-}
-
-function add_color_to_piece() {
-    show_color_menu;
-}
-
 function handle_piece_choice() {
     local COMMIT_HASH=("1" "%h");
     local TREE_HASH=("2" "%t");
@@ -174,6 +132,49 @@ function handle_piece_choice() {
         echo "$GIT_LOG_ALIAS_PIECE";
         ;;
     esac
+}
+
+function add_color_to_piece() {
+    show_color_menu;
+}
+
+function show_color_menu() {
+    local RESTORE="\033[0m";
+    local RED=("1" "\033[00;31m");
+    local GREEN=("2" "\033[00;32m");
+    local YELLOW=("3" "\033[00;33m");
+    local BLUE=("4" "\033[00;34m");
+    local PURPLE=("5" "\033[00;35m");
+    local CYAN=("6" "\033[00;36m");
+    local LGRAY=("7" "\033[00;37m");
+    local LRED=("8" "\033[01;31m");
+    local LGREEN=("9" "\033[01;32m");
+    local LYELLOW=("10" "\033[01;33m");
+    local LBLUE=("11" "\033[01;34m");
+    local LPURPLE=("12" "\033[01;35m");
+    local LCYAN=("13" "\033[01;36m");
+    local WHITE=("14" "\033[01;37m");
+
+    echo $'\n';
+    echo -e "1. ${RED[1]}RED";
+    echo -e "2. ${GREEN[1]}GREEN";
+    echo -e "3. ${YELLOW[1]}YELLOW";
+    echo -e "4. ${BLUE[1]}BLUE";
+    echo -e "5. ${PURPLE[1]}PURPLE";
+    echo -e "6. ${CYAN[1]}CYAN";
+    echo -e "7. ${LGRAY[1]}LIGHT GRAY";
+    echo -e "8. ${LRED[1]}LIGHT RED";
+    echo -e "9. ${LGREEN[1]}LIGHT GREEN";
+    echo -e "10. ${LYELLOW[1]}LIGHT YELLOW";
+    echo -e "11. ${LBLUE[1]}LIGHT BLUE";
+    echo -e "12. ${LPURPLE[1]}LIGHT PURPLE";
+    echo -e "13. ${LCYAN[1]}LIGHT CYAN";
+    echo -e "14. ${WHITE[1]}WHITE";
+    echo -e "${RESTORE}"
+
+    read -p $'\nWhat color?\n' MENU_CHOISE;
+
+    return $1+="${}"
 }
 
 start_oglog;
