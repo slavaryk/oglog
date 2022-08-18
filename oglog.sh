@@ -1,6 +1,7 @@
 #! bin/bash
 
 GIT_LOG_ALIAS=();
+GIT_LOG_ALIAS_CONTENT="";
 GIT_LOG_ALIAS_PIECE="";
 
 function start_oglog() {
@@ -83,101 +84,105 @@ function handle_piece_choice() {
 
     case $1 in
     ${COMMIT_HASH[0]})
-        GIT_LOG_ALIAS_PIECE+="${COMMIT_HASH[1]}";
-        add_color_to_piece;
-        echo "$GIT_LOG_ALIAS_PIECE";
+        build_alias_piece ${COMMIT_HASH[1]};
         ;;
     ${TREE_HASH[0]})
-        GIT_LOG_ALIAS_PIECE+="${TREE_HASH[1]}";
-        echo "$GIT_LOG_ALIAS_PIECE";
+        build_alias_piece ${TREE_HASH[1]};
         ;;
     ${PARENT_HASH[0]})
-        GIT_LOG_ALIAS_PIECE+="${PARENT_HASH[1]}";
-        echo "$GIT_LOG_ALIAS_PIECE";
+        build_alias_piece ${PARENT_HASH[1]};
         ;;
     ${AUTHOR_NAME[0]})
-        GIT_LOG_ALIAS_PIECE+="${AUTHOR_NAME[1]}";
-        echo "$GIT_LOG_ALIAS_PIECE";
+        build_alias_piece ${AUTHOR_NAME[1]};
         ;;
     ${AUTHOR_EMAIL[0]})
-        GIT_LOG_ALIAS_PIECE+="${AUTHOR_EMAIL[1]}";
-        echo "$GIT_LOG_ALIAS_PIECE";
+        build_alias_piece ${AUTHOR_EMAIL[1]};
         ;;
     ${AUTHOR_DATE[0]})
-        GIT_LOG_ALIAS_PIECE+="${AUTHOR_DATE[1]}";
-        echo "$GIT_LOG_ALIAS_PIECE";
+        build_alias_piece ${AUTHOR_DATE[1]};
         ;;
     ${AUTHOR_RELATIVE_DATE[0]})
-        GIT_LOG_ALIAS_PIECE+="${AUTHOR_RELATIVE_DATE[1]}";
-        echo "$GIT_LOG_ALIAS_PIECE";
+        build_alias_piece ${AUTHOR_RELATIVE_DATE[1]};
         ;;
     ${COMMITER_NAME[0]})
-        GIT_LOG_ALIAS_PIECE+="${COMMITER_NAME[1]}";
-        echo "$GIT_LOG_ALIAS_PIECE";
+        build_alias_piece ${COMMITER_NAME[1]};
         ;;
     ${COMMITER_EMAIL[0]})
-        GIT_LOG_ALIAS_PIECE+="${COMMITER_EMAIL[1]}";
-        echo "$GIT_LOG_ALIAS_PIECE";
+        build_alias_piece ${COMMITER_EMAIL[1]};
         ;;
     ${COMMITER_DATE[0]})
-        GIT_LOG_ALIAS_PIECE+="${COMMITER_DATE[1]}";
-        echo "$GIT_LOG_ALIAS_PIECE";
+        build_alias_piece ${COMMITER_DATE[1]};
         ;;
     ${COMMITER_RELATIVE_DATE[0]})
-        GIT_LOG_ALIAS_PIECE+="${COMMITER_RELATIVE_DATE[1]}";
-        echo "$GIT_LOG_ALIAS_PIECE";
+        build_alias_piece ${COMMITER_RELATIVE_DATE[1]};
         ;;
     ${MESSAGE[0]})
-        GIT_LOG_ALIAS_PIECE+="${MESSAGE[1]}";
-        echo "$GIT_LOG_ALIAS_PIECE";
+        build_alias_piece ${MESSAGE[1]};
         ;;
     esac
 }
 
+function build_alias_piece() {
+    GIT_LOG_ALIAS_PIECE+="$1";
+
+    show_color_menu
+
+    GIT_LOG_ALIAS_PIECE="$(add_color_to_piece)$GIT_LOG_ALIAS_PIECE ";
+    GIT_LOG_ALIAS_CONTENT+="$GIT_LOG_ALIAS_PIECE";
+    GIT_LOG_ALIAS_PIECE=""
+    echo "$GIT_LOG_ALIAS_CONTENT";
+}
+
 function add_color_to_piece() {
-    show_color_menu;
+    read -p $'\nWhat color?\n' MENU_CHOISE;
+
+    case $MENU_CHOISE in
+    1)
+        echo "%C(red)";
+        ;;
+    2)
+        echo "%C(green)";
+        ;;
+    3)
+        echo "%C(yellow)";
+        ;;
+    4)
+        echo "%C(blue)";
+        ;;
+    5)
+        echo "%C(cyan)";
+        ;;
+    6)
+        echo "%C(magenta)";
+        ;;
+    7)
+        echo "%C(white)";
+        ;;
+    esac
 }
 
 function show_color_menu() {
     local RESTORE="\033[0m";
-    local RED=("1" "\033[00;31m");
-    local GREEN=("2" "\033[00;32m");
-    local YELLOW=("3" "\033[00;33m");
-    local BLUE=("4" "\033[00;34m");
-    local PURPLE=("5" "\033[00;35m");
-    local CYAN=("6" "\033[00;36m");
-    local LGRAY=("7" "\033[00;37m");
-    local LRED=("8" "\033[01;31m");
-    local LGREEN=("9" "\033[01;32m");
-    local LYELLOW=("10" "\033[01;33m");
-    local LBLUE=("11" "\033[01;34m");
-    local LPURPLE=("12" "\033[01;35m");
-    local LCYAN=("13" "\033[01;36m");
-    local WHITE=("14" "\033[01;37m");
+    local RED=("\033[00;31m" "%C(red)");
+    local GREEN=("\033[00;32m" "%C(green)");
+    local YELLOW=("\033[00;33m" "%C(yellow)");
+    local BLUE=("\033[00;34m" "%C(blue)");
+    local CYAN=("\033[00;36m" "%C(cyan)");
+    local MAGENTA=("\033[00;35m" "%C(magenta)");
+    local WHITE=("\033[01;37m" "%C(white)");
 
     echo $'\n';
-    echo -e "1. ${RED[1]}RED";
-    echo -e "2. ${GREEN[1]}GREEN";
-    echo -e "3. ${YELLOW[1]}YELLOW";
-    echo -e "4. ${BLUE[1]}BLUE";
-    echo -e "5. ${PURPLE[1]}PURPLE";
-    echo -e "6. ${CYAN[1]}CYAN";
-    echo -e "7. ${LGRAY[1]}LIGHT GRAY";
-    echo -e "8. ${LRED[1]}LIGHT RED";
-    echo -e "9. ${LGREEN[1]}LIGHT GREEN";
-    echo -e "10. ${LYELLOW[1]}LIGHT YELLOW";
-    echo -e "11. ${LBLUE[1]}LIGHT BLUE";
-    echo -e "12. ${LPURPLE[1]}LIGHT PURPLE";
-    echo -e "13. ${LCYAN[1]}LIGHT CYAN";
-    echo -e "14. ${WHITE[1]}WHITE";
+    echo -e "1. ${RED[0]}RED${RESTORE}";
+    echo -e "2. ${GREEN[0]}GREEN${RESTORE}";
+    echo -e "3. ${YELLOW[0]}YELLOW${RESTORE}";
+    echo -e "4. ${BLUE[0]}BLUE${RESTORE}";
+    echo -e "5. ${CYAN[0]}CYAN${RESTORE}";
+    echo -e "6. ${MAGENTA[0]}MAGENTA${RESTORE}";
+    echo -e "7. ${WHITE[0]}WHITE${RESTORE}";
     echo -e "${RESTORE}"
-
-    read -p $'\nWhat color?\n' MENU_CHOISE;
-
-    return $1+="${}"
 }
 
 start_oglog;
 
 unset GIT_LOG_ALIAS;
-unset GIT_LOG_ALIAS_PIECE;
+unset GIT_LOG_ALIAS_CONTENT;
