@@ -84,45 +84,45 @@ function handle_piece_choice() {
 
     case $1 in
     ${COMMIT_HASH[0]})
-        build_alias_piece ${COMMIT_HASH[1]};
+        add_alias_piece ${COMMIT_HASH[1]};
         ;;
     ${TREE_HASH[0]})
-        build_alias_piece ${TREE_HASH[1]};
+        add_alias_piece ${TREE_HASH[1]};
         ;;
     ${PARENT_HASH[0]})
-        build_alias_piece ${PARENT_HASH[1]};
+        add_alias_piece ${PARENT_HASH[1]};
         ;;
     ${AUTHOR_NAME[0]})
-        build_alias_piece ${AUTHOR_NAME[1]};
+        add_alias_piece ${AUTHOR_NAME[1]};
         ;;
     ${AUTHOR_EMAIL[0]})
-        build_alias_piece ${AUTHOR_EMAIL[1]};
+        add_alias_piece ${AUTHOR_EMAIL[1]};
         ;;
     ${AUTHOR_DATE[0]})
-        build_alias_piece ${AUTHOR_DATE[1]};
+        add_alias_piece ${AUTHOR_DATE[1]};
         ;;
     ${AUTHOR_RELATIVE_DATE[0]})
-        build_alias_piece ${AUTHOR_RELATIVE_DATE[1]};
+        add_alias_piece ${AUTHOR_RELATIVE_DATE[1]};
         ;;
     ${COMMITER_NAME[0]})
-        build_alias_piece ${COMMITER_NAME[1]};
+        add_alias_piece ${COMMITER_NAME[1]};
         ;;
     ${COMMITER_EMAIL[0]})
-        build_alias_piece ${COMMITER_EMAIL[1]};
+        add_alias_piece ${COMMITER_EMAIL[1]};
         ;;
     ${COMMITER_DATE[0]})
-        build_alias_piece ${COMMITER_DATE[1]};
+        add_alias_piece ${COMMITER_DATE[1]};
         ;;
     ${COMMITER_RELATIVE_DATE[0]})
-        build_alias_piece ${COMMITER_RELATIVE_DATE[1]};
+        add_alias_piece ${COMMITER_RELATIVE_DATE[1]};
         ;;
     ${MESSAGE[0]})
-        build_alias_piece ${MESSAGE[1]};
+        add_alias_piece ${MESSAGE[1]};
         ;;
     esac
 }
 
-function build_alias_piece() {
+function add_alias_piece() {
     GIT_LOG_ALIAS_PIECE+="$1";
 
     show_color_menu
