@@ -42,14 +42,17 @@ function handle_main_menu_choice() {
 
 function build_git_log_alias() {
     local MENU_CHOISE="";
-    local EXIT=13;
+    local SAVE=13;
 
-    while [ "$MENU_CHOISE" != "$EXIT" ];
+    while [ "$MENU_CHOISE" != "$SAVE" ];
         do
             show_pieces_menu;
             read -p $'\nWhat you want to see in your git log?\n' MENU_CHOISE;
             handle_piece_choice $MENU_CHOISE;
         done
+
+    GIT_LOG_ALIAS="git log --pretty=format:\"$GIT_LOG_ALIAS_CONTENT\"";
+    alias "oglog=$GIT_LOG_ALIAS";
 }
 
 function show_pieces_menu() {
@@ -65,7 +68,7 @@ function show_pieces_menu() {
     echo $'10. Commiter date';
     echo $'11. Relative commiter date';
     echo $'12. Message';
-    echo $'13. Back';
+    echo $'\n13. Save';
 }
 
 function handle_piece_choice() {
@@ -186,3 +189,4 @@ start_oglog;
 
 unset GIT_LOG_ALIAS;
 unset GIT_LOG_ALIAS_CONTENT;
+unset GIT_LOG_ALIAS_PIECE;
