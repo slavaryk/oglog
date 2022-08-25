@@ -1,7 +1,7 @@
 #! bin/bash
 
-GIT_LOG_ALIAS=();
-GIT_LOG_ALIAS_CONTENT="";
+GIT_LOG_ALIAS="";
+GIT_LOG_ALIAS_VALUE="";
 GIT_LOG_ALIAS_PIECE="";
 
 function start_oglog() {
@@ -51,7 +51,7 @@ function build_git_log_alias() {
             handle_piece_choice $MENU_CHOISE;
         done
 
-    GIT_LOG_ALIAS="git log --pretty=format:\"$GIT_LOG_ALIAS_CONTENT\"";
+    GIT_LOG_ALIAS="git log --pretty=format:\"$GIT_LOG_ALIAS_VALUE\"";
     alias "oglog=$GIT_LOG_ALIAS";
 }
 
@@ -87,53 +87,53 @@ function handle_piece_choice() {
 
     case $1 in
     ${COMMIT_HASH[0]})
-        add_alias_piece ${COMMIT_HASH[1]};
+        build_alias_piece ${COMMIT_HASH[1]};
         ;;
     ${TREE_HASH[0]})
-        add_alias_piece ${TREE_HASH[1]};
+        build_alias_piece ${TREE_HASH[1]};
         ;;
     ${PARENT_HASH[0]})
-        add_alias_piece ${PARENT_HASH[1]};
+        build_alias_piece ${PARENT_HASH[1]};
         ;;
     ${AUTHOR_NAME[0]})
-        add_alias_piece ${AUTHOR_NAME[1]};
+        build_alias_piece ${AUTHOR_NAME[1]};
         ;;
     ${AUTHOR_EMAIL[0]})
-        add_alias_piece ${AUTHOR_EMAIL[1]};
+        build_alias_piece ${AUTHOR_EMAIL[1]};
         ;;
     ${AUTHOR_DATE[0]})
-        add_alias_piece ${AUTHOR_DATE[1]};
+        build_alias_piece ${AUTHOR_DATE[1]};
         ;;
     ${AUTHOR_RELATIVE_DATE[0]})
-        add_alias_piece ${AUTHOR_RELATIVE_DATE[1]};
+        build_alias_piece ${AUTHOR_RELATIVE_DATE[1]};
         ;;
     ${COMMITER_NAME[0]})
-        add_alias_piece ${COMMITER_NAME[1]};
+        build_alias_piece ${COMMITER_NAME[1]};
         ;;
     ${COMMITER_EMAIL[0]})
-        add_alias_piece ${COMMITER_EMAIL[1]};
+        build_alias_piece ${COMMITER_EMAIL[1]};
         ;;
     ${COMMITER_DATE[0]})
-        add_alias_piece ${COMMITER_DATE[1]};
+        build_alias_piece ${COMMITER_DATE[1]};
         ;;
     ${COMMITER_RELATIVE_DATE[0]})
-        add_alias_piece ${COMMITER_RELATIVE_DATE[1]};
+        build_alias_piece ${COMMITER_RELATIVE_DATE[1]};
         ;;
     ${MESSAGE[0]})
-        add_alias_piece ${MESSAGE[1]};
+        build_alias_piece ${MESSAGE[1]};
         ;;
     esac
 }
 
-function add_alias_piece() {
-    GIT_LOG_ALIAS_PIECE+="$1";
-
+function build_alias_piece() {
     show_color_menu
 
-    GIT_LOG_ALIAS_PIECE="$(add_color_to_piece)$GIT_LOG_ALIAS_PIECE ";
-    GIT_LOG_ALIAS_CONTENT+="$GIT_LOG_ALIAS_PIECE";
+    GIT_LOG_ALIAS_PIECE="$(add_color_to_piece)$1 ";
+    GIT_LOG_ALIAS_PIECE="$GIT_LOG_ALIAS_PIECE$(add_divider_to_piece) ";
+
+    GIT_LOG_ALIAS_VALUE+="$GIT_LOG_ALIAS_PIECE";
     GIT_LOG_ALIAS_PIECE=""
-    echo "$GIT_LOG_ALIAS_CONTENT";
+    echo "$GIT_LOG_ALIAS_VALUE";
 }
 
 function add_color_to_piece() {
@@ -185,8 +185,45 @@ function show_color_menu() {
     echo -e "${RESTORE}"
 }
 
+function add_divider_to_piece() {
+    show_pieces_menu;
+
+    read -p $'\nWhat divider?\n' MENU_CHOISE;
+
+    case $MENU_CHOISE in
+    1)
+        echo "-";
+        ;;
+    2)
+        echo "->";
+        ;;
+    3)
+        echo "_";
+        ;;
+    4)
+        echo ":";
+        ;;
+    5)
+        echo " ";
+        ;;
+    *)
+        echo "$MENU_CHOISE";
+        ;;
+    esac
+}
+
+function show_dividers_menu() {
+    echo $'\n';
+    echo $'You can write your variant!\n';
+    echo "1. -";
+    echo "2. ->";
+    echo "3. _";
+    echo "4. :";
+    echo "5. whitespace";
+}
+
 start_oglog;
 
 unset GIT_LOG_ALIAS;
-unset GIT_LOG_ALIAS_CONTENT;
+unset GIT_LOG_ALIAS_VALUE;
 unset GIT_LOG_ALIAS_PIECE;
