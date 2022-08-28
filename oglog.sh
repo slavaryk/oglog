@@ -37,6 +37,10 @@ function handle_main_menu_choice() {
         ;;
     $EXIT)
         echo $'\nGood bye!\n'
+        ;;
+    *)
+        echo $'\nWhat?\n';
+        ;;
     esac
 }
 
@@ -122,6 +126,9 @@ function handle_piece_choice() {
     ${MESSAGE[0]})
         build_alias_piece ${MESSAGE[1]};
         ;;
+    *)
+        echo $'\nMaybe try again?\n';
+        ;;
     esac
 }
 
@@ -160,6 +167,9 @@ function add_color_to_piece() {
         ;;
     7)
         echo "%C(white)";
+        ;;
+    *)
+        echo $'I don\'t know this color :(';
         ;;
     esac
 }
