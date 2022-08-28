@@ -4,6 +4,16 @@ GIT_LOG_ALIAS="";
 GIT_LOG_ALIAS_VALUE="";
 GIT_LOG_ALIAS_PIECE="";
 
+function read_user_input() {
+    if [[ $0 == "-zsh" ]]
+    then
+        read "user_input?$1";
+    else
+        read -p "$1" user_input;
+    fi
+    echo $user_input;
+}
+
 function start_oglog() {
     local MENU_CHOISE="";
     local EXIT=3;
@@ -11,7 +21,7 @@ function start_oglog() {
     while [ "$MENU_CHOISE" != "$EXIT" ];
         do
             show_main_menu;
-            read -p $'\nTell me what you want, what you realy realy want?\n' MENU_CHOISE;
+            MENU_CHOISE=$(read_user_input $'\nTell me what you want, what you realy realy want?\n');
             handle_main_menu_choice $MENU_CHOISE;
         done
 }
@@ -39,8 +49,7 @@ function handle_main_menu_choice() {
         echo $'\nGood bye!\n'
         ;;
     *)
-        echo $'\nWhat?\n';
-        ;;
+        echo $'\nHmmmph\n'
     esac
 }
 
@@ -51,12 +60,12 @@ function build_git_log_alias() {
     while [ "$MENU_CHOISE" != "$SAVE" ];
         do
             show_pieces_menu;
-            read -p $'\nWhat you want to see in your git log?\n' MENU_CHOISE;
+            MENU_CHOISE=$(read_user_input $'\nWhat you want to see in your git log?\n');
             handle_piece_choice $MENU_CHOISE;
         done
 
     GIT_LOG_ALIAS="git log --pretty=format:\"$GIT_LOG_ALIAS_VALUE\"";
-    alias "oglog=$GIT_LOG_ALIAS";
+    alias "$(add_alias_name)=$GIT_LOG_ALIAS";
 }
 
 function show_pieces_menu() {
@@ -88,6 +97,7 @@ function handle_piece_choice() {
     local COMMITER_DATE=("10" "%cd");
     local COMMITER_RELATIVE_DATE=("11" "%cr");
     local MESSAGE=("12" "%s");
+    local SAVE=13;
 
     case $1 in
     ${COMMIT_HASH[0]})
@@ -126,6 +136,9 @@ function handle_piece_choice() {
     ${MESSAGE[0]})
         build_alias_piece ${MESSAGE[1]};
         ;;
+    $SAVE)
+        echo $'Okay!';
+        ;;
     *)
         echo $'\nMaybe try again?\n';
         ;;
@@ -133,18 +146,19 @@ function handle_piece_choice() {
 }
 
 function build_alias_piece() {
-    show_color_menu
-
+    show_color_menu;
     GIT_LOG_ALIAS_PIECE="$(add_color_to_piece)$1 ";
+
+    show_dividers_menu;
     GIT_LOG_ALIAS_PIECE="$GIT_LOG_ALIAS_PIECE$(add_divider_to_piece) ";
 
     GIT_LOG_ALIAS_VALUE+="$GIT_LOG_ALIAS_PIECE";
-    GIT_LOG_ALIAS_PIECE=""
+    GIT_LOG_ALIAS_PIECE="";
     echo "$GIT_LOG_ALIAS_VALUE";
 }
 
 function add_color_to_piece() {
-    read -p $'\nWhat color?\n' MENU_CHOISE;
+    MENU_CHOISE=$(read_user_input $'\nWhat color?\n');
 
     case $MENU_CHOISE in
     1)
@@ -196,25 +210,26 @@ function show_color_menu() {
 }
 
 function add_divider_to_piece() {
-    show_pieces_menu;
-
-    read -p $'\nWhat divider?\n' MENU_CHOISE;
+    MENU_CHOISE=$(read_user_input $'\nWhat divider?\n');
 
     case $MENU_CHOISE in
     1)
-        echo "-";
+        echo $'--';
         ;;
     2)
-        echo "->";
+        echo $'->';
         ;;
     3)
-        echo "_";
+        echo $'_';
         ;;
     4)
-        echo ":";
+        echo $':';
         ;;
     5)
-        echo " ";
+        echo $' ';
+        ;;
+    6)
+        echo '';
         ;;
     *)
         echo "$MENU_CHOISE";
@@ -225,11 +240,17 @@ function add_divider_to_piece() {
 function show_dividers_menu() {
     echo $'\n';
     echo $'You can write your variant!\n';
-    echo "1. -";
+    echo "1. --";
     echo "2. ->";
     echo "3. _";
     echo "4. :";
     echo "5. whitespace";
+    echo "6. none";
+}
+
+function add_alias_name() {
+    ALIAS_NAME=$(read_user_input $'\nName your alias?\n');
+    echo "$ALIAS_NAME";
 }
 
 start_oglog;
