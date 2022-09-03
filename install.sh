@@ -29,6 +29,7 @@ case $user_answer in
             echo $'Downloading main oglog script...\n\n';
             curl -s "https://raw.githubusercontent.com/mopqpqua/oglog/master/oglog.sh" > "$XDG_CONFIG_HOME/.oglog/oglog.sh";
             sleep 0.3;
+            script_dir="$XDG_CONFIG_HOME/.oglog";
         else
             echo $'Creating script specific folder in XDG_CONFIG_HOME directory...\n\n';
             mkdir "$XDG_CONFIG_HOME/.oglog";
@@ -37,6 +38,7 @@ case $user_answer in
             echo $'Downloading main oglog script...\n\n';
             curl -s "https://raw.githubusercontent.com/mopqpqua/oglog/master/oglog.sh" > "$XDG_CONFIG_HOME/.oglog/oglog.sh";
             sleep 0.3;
+            script_dir="$XDG_CONFIG_HOME/.oglog";
         fi
     else
         echo $'\n\nXDG_CONFIG_HOME not found.\nChecking your home directory for .config folder\n\n';
@@ -44,7 +46,7 @@ case $user_answer in
 
         if [[ -d "$HOME/.config" ]]
         then
-            echo $'Found it!';
+            echo $'Found it!\n\n';
             sleep 0.3;
 
             echo $'Check your HOME/.config directory for necessary oglog folder...\n\n';
@@ -55,6 +57,7 @@ case $user_answer in
                 echo $'Downloading main oglog script...\n\n';
                 curl -s "https://raw.githubusercontent.com/mopqpqua/oglog/master/oglog.sh" > "$HOME/.config/.oglog/oglog.sh";
                 sleep 0.3;
+                script_dir="$HOME/.config/.oglog";
             else
                 echo $'Creating script specific folder in HOME/.config directory...\n\n';
                 mkdir "$HOME/.config/.oglog";
@@ -63,6 +66,7 @@ case $user_answer in
                 echo $'Downloading main oglog script from https://raw.githubusercontent.com/mopqpqua/oglog/master/oglog.sh...\n\n';
                 curl -s "https://raw.githubusercontent.com/mopqpqua/oglog/master/oglog.sh" > "$HOME/.config/.oglog/oglog.sh";
                 sleep 0.3;
+                script_dir="$HOME/.config/.oglog";
             fi
         else
             echo $'Check your HOME directory for necessary oglog folder...\n\n';
@@ -74,6 +78,7 @@ case $user_answer in
                 echo $'Downloading main oglog script...\n\n';
                 curl -s "https://raw.githubusercontent.com/mopqpqua/oglog/master/oglog.sh" > "$HOME/.oglog/oglog.sh";
                 sleep 0.3;
+                script_dir="$HOME/.oglog";
             else
                 echo $'Creating script specific folder in HOME directory...\n\n';
                 mkdir "$HOME/.oglog";
@@ -82,8 +87,57 @@ case $user_answer in
                 echo $'Downloading main oglog script from https://raw.githubusercontent.com/mopqpqua/oglog/master/oglog.sh...\n\n';
                 curl -s "https://raw.githubusercontent.com/mopqpqua/oglog/master/oglog.sh" > "$HOME/.oglog/oglog.sh";
                 sleep 0.3;
+                script_dir="$HOME/.oglog";
             fi
         fi
+    fi
+
+    if [[ $0 == "-zsh" ]]
+    then
+        echo $'Check if youre using ZDOTDIR\n\n';
+        if [[ $ZDOTDIR ]]
+        then
+            echo $'Found it!\n\n';
+
+            if [[ -f "$ZDOTDIR/.zshrc" ]]
+            then
+                echo $'Add some oglog lines to ZDOTDIR/.zshrc...\n\n';
+
+                echo "" >> "$ZDOTDIR/.zshrc";
+                echo "# oglog script executing" >> "$ZDOTDIR/.zshrc";
+                echo "for f in $script_dir/*; do source "'$f'"; done" >> "$ZDOTDIR/.zshrc";
+
+                source "$script_dir/oglog.sh";
+            else
+                echo $'.zshrc not found, lets create it in you ZDOTDIR!\n\n';
+                touch "$ZDOTDIR/.zshrc";
+                sleep 0.3;
+                echo $'Add some oglog lines to ZDOTDIR/.zshrc...\n\n';
+
+                echo "" >> "$ZDOTDIR/.zshrc";
+                echo "# oglog script executing" >> "$ZDOTDIR/.zshrc";
+                echo "for f in $script_dir/*; do source "'$f'"; done" >> "$ZDOTDIR/.zshrc";
+
+                source "$script_dir/oglog.sh";
+            fi
+        else
+            echo $'ZDOTDIR not found ;c\n\n';
+            echo $'Add some oglog lines to HOME/.zshrc...\n\n'
+
+            echo "" >> "$HOME/.zshrc";
+            echo "# oglog script executing" >> "$HOME/.zshrc";
+            echo "for f in $script_dir/*; do source "'$f'"; done" >> "$HOME/.zshrc";
+
+            source "$script_dir/oglog.sh";
+        fi
+    else
+        echo $'Add some oglog lines to HOME/.bashrc...\n\n';
+
+        echo "" >> "$HOME/.bashrc";
+        echo "# oglog script executing" >> "$HOME/.bashrc";
+        echo "for f in $script_dir/*; do source "'$f'"; done" >> "$HOME/.bashrc";
+
+        source "$script_dir/oglog.sh";
     fi
     ;;
 "N" | "n")
@@ -91,4 +145,5 @@ case $user_answer in
     ;;
 esac
 
+unset script_dir;
 unset user_answer;
