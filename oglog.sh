@@ -209,7 +209,7 @@ function oglog_show_color_menu() {
     echo -e "${RESTORE}"
 }
 
-function oglog_oglog_add_divider_to_piece() {
+function oglog_add_divider_to_piece() {
     MENU_CHOISE=$(oglog_read_user_input $'\nWhat divider?\n');
 
     case $MENU_CHOISE in
@@ -248,13 +248,11 @@ function oglog_show_dividers_menu() {
     echo "6. none";
 }
 
-function oglog_oglog_add_alias_name() {
+function oglog_add_alias_name() {
     ALIAS_NAME=$(oglog_read_user_input $'\nName your alias?\n');
     echo "$ALIAS_NAME";
 }
 
-oglog;
-
-# unset GIT_LOG_ALIAS;
-# unset GIT_LOG_ALIAS_VALUE;
-# unset GIT_LOG_ALIAS_PIECE;
+unset GIT_LOG_ALIAS;
+unset GIT_LOG_ALIAS_VALUE;
+unset GIT_LOG_ALIAS_PIECE;
