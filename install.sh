@@ -101,17 +101,24 @@ case $user_answer in
 
             if [[ -f "$ZDOTDIR/.zshrc" ]]
             then
-                echo $'Add some oglog lines to ZDOTDIR/.zshrc...\n\n';
+                echo $'Checking lines in ZDOTDIR/.zshrc\n\n';
+                if grep -qF "for f in $script_dir/*; do source "'$f'"; done" $ZDOTDIR/.zshrc;
+                then
+                    echo $'Execution scripts already exists\n\n';
+                else
+                    echo $'Add some oglog lines to ZDOTDIR/.zshrc...\n\n';
 
-                echo "" >> "$ZDOTDIR/.zshrc";
-                echo "# oglog script executing" >> "$ZDOTDIR/.zshrc";
-                echo "for f in $script_dir/*; do source "'$f'"; done" >> "$ZDOTDIR/.zshrc";
+                    echo "" >> "$ZDOTDIR/.zshrc";
+                    echo "# oglog script executing" >> "$ZDOTDIR/.zshrc";
+                    echo "for f in $script_dir/*; do source "'$f'"; done" >> "$ZDOTDIR/.zshrc";
 
-                source "$script_dir/oglog.sh";
+                    source "$script_dir/oglog.sh";
+                fi
             else
                 echo $'.zshrc not found, lets create it in you ZDOTDIR!\n\n';
                 touch "$ZDOTDIR/.zshrc";
                 sleep 0.3;
+
                 echo $'Add some oglog lines to ZDOTDIR/.zshrc...\n\n';
 
                 echo "" >> "$ZDOTDIR/.zshrc";
@@ -122,22 +129,49 @@ case $user_answer in
             fi
         else
             echo $'ZDOTDIR not found ;c\n\n';
-            echo $'Add some oglog lines to HOME/.zshrc...\n\n'
+            if [[ -f "$HOME/.zshrc" ]]
+            then
+                echo $'Checking lines in HOME/.zshrc\n\n';
+                if grep -qF "for f in $script_dir/*; do source "'$f'"; done" $HOME/.zshrc;
+                then
+                    echo $'Execution scripts already exists\n\n';
+                else
+                    echo $'Add some oglog lines to HOME/.zshrc...\n\n';
 
-            echo "" >> "$HOME/.zshrc";
-            echo "# oglog script executing" >> "$HOME/.zshrc";
-            echo "for f in $script_dir/*; do source "'$f'"; done" >> "$HOME/.zshrc";
+                    echo "" >> "$HOME/.zshrc";
+                    echo "# oglog script executing" >> "$HOME/.zshrc";
+                    echo "for f in $script_dir/*; do source "'$f'"; done" >> "$HOME/.zshrc";
+
+                    source "$script_dir/oglog.sh";
+                fi
+            else
+                echo $'.zshrc not found, lets create it in you HOME!\n\n';
+                touch "$HOME/.zshrc";
+                sleep 0.3;
+
+                echo $'Add some oglog lines to HOME/.zshrc...\n\n';
+
+                echo "" >> "$HOME/.zshrc";
+                echo "# oglog script executing" >> "$HOME/.zshrc";
+                echo "for f in $script_dir/*; do source "'$f'"; done" >> "$HOME/.zshrc";
+
+                source "$script_dir/oglog.sh";
+            fi
+        fi
+    else
+        echo $'Checking lines in HOME/.bashrc\n\n';
+        if grep -qF "for f in $script_dir/*; do source "'$f'"; done" $HOME/.bashrc;
+        then
+            echo $'Execution scripts already exists\n\n'
+        else
+            echo $'Add some oglog lines to HOME/.bashrc...\n\n';
+
+            echo "" >> "$HOME/.bashrc";
+            echo "# oglog script executing" >> "$HOME/.bashrc";
+            echo "for f in $script_dir/*; do source "'$f'"; done" >> "$HOME/.bashrc";
 
             source "$script_dir/oglog.sh";
         fi
-    else
-        echo $'Add some oglog lines to HOME/.bashrc...\n\n';
-
-        echo "" >> "$HOME/.bashrc";
-        echo "# oglog script executing" >> "$HOME/.bashrc";
-        echo "for f in $script_dir/*; do source "'$f'"; done" >> "$HOME/.bashrc";
-
-        source "$script_dir/oglog.sh";
     fi
     ;;
 "N" | "n")
