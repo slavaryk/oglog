@@ -14,6 +14,12 @@ function oglog() {
             MENU_CHOICE=$(oglog_read_user_input);
             oglog_handle_main_menu_choice $MENU_CHOICE;
         done
+
+    unset GIT_LOG_ALIAS;
+    unset GIT_LOG_ALIAS_VALUE;
+    unset GIT_LOG_ALIAS_PIECE;
+    unset ALIAS_NAME;
+    unset MENU_CHOICE;
 }
 
 function oglog_read_user_input() {
