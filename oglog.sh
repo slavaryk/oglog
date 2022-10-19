@@ -142,23 +142,23 @@ function oglog_build_alias_piece() {
 
 function oglog_show_color_menu() {
     local RESTORE="\033[0m";
-    local RED=("\033[00;31m" "%C(red)");
-    local GREEN=("\033[00;32m" "%C(green)");
-    local YELLOW=("\033[00;33m" "%C(yellow)");
-    local BLUE=("\033[00;34m" "%C(blue)");
-    local CYAN=("\033[00;36m" "%C(cyan)");
-    local MAGENTA=("\033[00;35m" "%C(magenta)");
-    local WHITE=("\033[01;37m" "%C(white)");
+    local RED="\033[00;31m";
+    local GREEN="\033[00;32m";
+    local YELLOW="\033[00;33m";
+    local BLUE="\033[00;34m";
+    local CYAN="\033[00;36m";
+    local MAGENTA="\033[00;35m";
+    local WHITE="\033[01;37m";
 
     echo $'\nWhat color?\n'
-    echo -e "1. ${RED[1]}RED${RESTORE}";
-    echo -e "2. ${GREEN[1]}GREEN${RESTORE}";
-    echo -e "3. ${YELLOW[1]}YELLOW${RESTORE}";
-    echo -e "4. ${BLUE[1]}BLUE${RESTORE}";
-    echo -e "5. ${CYAN[1]}CYAN${RESTORE}";
-    echo -e "6. ${MAGENTA[1]}MAGENTA${RESTORE}";
-    echo -e "7. ${WHITE[1]}WHITE${RESTORE}";
-    echo -e "${RESTORE}"
+    echo -e "1. $RED RED$RESTORE";
+    echo -e "2. $GREEN GREEN$RESTORE";
+    echo -e "3. $YELLOW YELLOW$RESTORE";
+    echo -e "4. $BLUE BLUE$RESTORE";
+    echo -e "5. $CYAN CYAN$RESTORE";
+    echo -e "6. $MAGENTA MAGENTA$RESTORE";
+    echo -e "7. $WHITE WHITE$RESTORE";
+    echo -e "$RESTORE"
 }
 
 function oglog_add_color_to_piece() {
