@@ -11,4 +11,6 @@ This utilite helps you to configure your own git log alias
 
 ## Installation
 
-```eval "$(curl "https://raw.githubusercontent.com/mopqpqua/oglog/master/install.sh")" && oglog_install```
+```
+eval "$(curl "https://raw.githubusercontent.com/mopqpqua/oglog/master/install.sh")" && oglog_install
+```
