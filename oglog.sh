@@ -72,9 +72,12 @@ function oglog_build_git_log_alias() {
 
 function oglog_show_pieces_menu() {
     echo $'\nWhat you want to see in your git log?\n';
-    echo $'\n1. Commit hash';
+    echo $'\nCommits:';
+    echo $'1. Commit hash';
     echo $'2. Tree hash';
-    echo $'3. Parent hash';
+    echo $'3. Parent hashes';
+
+    echo $'\nAuthor/Commiter info:';
     echo $'4. Author name';
     echo $'5. Author email';
     echo $'6. Author date';
@@ -83,7 +86,16 @@ function oglog_show_pieces_menu() {
     echo $'9. Commiter email';
     echo $'10. Commiter date';
     echo $'11. Relative commiter date';
+
+    echo $'\nCommit information from author:';
     echo $'12. Message';
+    echo $'13. Body (description)';
+    echo $'14. Body and message';
+    echo $'15. Notes';
+
+    echo $'\nRefs:'
+    echo $'16. Ref names (tags, branches) like --decorate option';
+    echo $'17. Ref names, but without "(", ")"';
     echo $'\ns/S -> Save';
 }
 
@@ -124,6 +136,21 @@ function oglog_handle_piece_choice() {
         ;;
     "12")
         oglog_build_alias_piece "%s";
+        ;;
+    "13")
+        oglog_build_alias_piece "%b";
+        ;;
+    "14")
+        oglog_build_alias_piece "%B";
+        ;;
+    "15")
+        oglog_build_alias_piece "%N";
+        ;;
+    "16")
+        oglog_build_alias_piece "%d";
+        ;;
+    "17")
+        oglog_build_alias_piece "%D";
         ;;
     "s" | "S")
         echo $'Okay!';
@@ -206,7 +233,8 @@ function oglog_show_dividers_menu() {
     echo "3. _";
     echo "4. :";
     echo "5. whitespace";
-    echo "6. none";
+    echo "6. newline";
+    echo "7. none";
 }
 
 function oglog_add_divider_to_piece() {
@@ -229,6 +257,9 @@ function oglog_add_divider_to_piece() {
         echo $' ';
         ;;
     "6")
+        echo "%n";
+        ;;
+    "7")
         echo "";
         ;;
     *)
