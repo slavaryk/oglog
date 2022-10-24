@@ -71,13 +71,16 @@ function oglog_build_git_log_alias() {
 }
 
 function oglog_show_pieces_menu() {
+    local WHITE="\033[01;37m";
+    local RESTORE="\033[0m";
+
     echo $'\nWhat you want to see in your git log?\n';
-    echo $'\nCommits:';
+    echo -e "$WHITE Commits: $RESTORE";
     echo $'1. Commit hash';
     echo $'2. Tree hash';
-    echo $'3. Parent hashes';
+    echo $'3. Parent hashes\n';
 
-    echo $'\nAuthor/Commiter info:';
+    echo -e "$WHITE Author/Commiter info: $RESTORE";
     echo $'4. Author name';
     echo $'5. Author email';
     echo $'6. Author date';
@@ -85,15 +88,15 @@ function oglog_show_pieces_menu() {
     echo $'8. Commiter name';
     echo $'9. Commiter email';
     echo $'10. Commiter date';
-    echo $'11. Relative commiter date';
+    echo $'11. Relative commiter date\n';
 
-    echo $'\nCommit information from author:';
+    echo -e "$WHITE Commit information from author: $RESTORE";
     echo $'12. Message';
     echo $'13. Body (description)';
     echo $'14. Body and message';
-    echo $'15. Notes';
+    echo $'15. Notes\n';
 
-    echo $'\nRefs:'
+    echo -e "$WHITE Refs: $RESTORE";
     echo $'16. Ref names (tags, branches) like --decorate option';
     echo $'17. Ref names, but without "(", ")"';
     echo $'\ns/S -> Save';
