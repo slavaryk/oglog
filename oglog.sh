@@ -36,6 +36,7 @@ function oglog_show_main_menu() {
     oglog_print_divider;
     echo $'1. Add new git log alias';
     echo $'2. Take a hug!';
+    echo $'3. Update';
     echo $'q. Exit';
     echo $'\nTell me what you want, what you realy realy want?\n';
 }
@@ -43,6 +44,7 @@ function oglog_show_main_menu() {
 function oglog_handle_main_menu_choice() {
     local ALIAS_ADDING=1;
     local HUG=2;
+    local UPDATE=3;
     local EXIT="q";
 
     case $1 in
@@ -51,6 +53,9 @@ function oglog_handle_main_menu_choice() {
         ;;
     $HUG)
         echo $'\nI HUG YOU <3!\n';
+        ;;
+    $UPDATE)
+        eval "$(curl "https://raw.githubusercontent.com/mopqpqua/oglog/master/update.sh")" && oglog_update;
         ;;
     $EXIT)
         echo $'\nGood bye!\n'
