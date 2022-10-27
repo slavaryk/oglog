@@ -85,6 +85,7 @@ function oglog_show_pieces_menu() {
     local RESTORE="\033[0m";
 
     echo $'\nWhat you want to see in your git log?\n';
+    oglog_print_divider;
     echo -e "$WHITE Commits: $RESTORE";
     echo $'1. Commit hash';
     echo $'2. Tree hash';
