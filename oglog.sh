@@ -27,8 +27,13 @@ function oglog_read_user_input() {
     echo "$user_input";
 }
 
+function oglog_print_divider() {
+    echo $'\n-----------------------\n';
+}
+
 function oglog_show_main_menu() {
-    echo $'\nChoose your hero!\n';
+    echo $'\_/_/_/_/ Choose an option and hit enter: \_/_/_/_/';
+    oglog_print_divider;
     echo $'1. Add new git log alias';
     echo $'2. Take a hug!';
     echo $'q. Exit';
