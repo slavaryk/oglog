@@ -20,6 +20,8 @@ function oglog_install() {
 
                 echo $'Downloading main oglog script from https://raw.githubusercontent.com/mopqpqua/oglog/master/oglog.sh...\n\n';
                 curl -s "https://raw.githubusercontent.com/mopqpqua/oglog/master/oglog.sh" > "$script_dir/oglog.sh";
+                curl -s "https://raw.githubusercontent.com/mopqpqua/oglog/master/aliases.sh" > "$script_dir/aliases.sh";
+                curl -s "https://raw.githubusercontent.com/mopqpqua/oglog/master/config.sh" > "$script_dir/config.sh";
                 sleep 0.2;
             else
                 echo $'Creating script specific folder in XDG_CONFIG_HOME directory...\n\n';
@@ -29,6 +31,8 @@ function oglog_install() {
 
                 echo $'Downloading main oglog script from https://raw.githubusercontent.com/mopqpqua/oglog/master/oglog.sh...\n\n';
                 curl -s "https://raw.githubusercontent.com/mopqpqua/oglog/master/oglog.sh" > "$script_dir/oglog.sh";
+                curl -s "https://raw.githubusercontent.com/mopqpqua/oglog/master/aliases.sh" > "$script_dir/aliases.sh";
+                curl -s "https://raw.githubusercontent.com/mopqpqua/oglog/master/config.sh" > "$script_dir/config.sh";
                 sleep 0.2;
             fi
         else
@@ -49,6 +53,8 @@ function oglog_install() {
 
                     echo $'Downloading main oglog script from https://raw.githubusercontent.com/mopqpqua/oglog/master/oglog.sh...\n\n';
                     curl -s "https://raw.githubusercontent.com/mopqpqua/oglog/master/oglog.sh" > "$script_dir/oglog.sh";
+                    curl -s "https://raw.githubusercontent.com/mopqpqua/oglog/master/aliases.sh" > "$script_dir/aliases.sh";
+                    curl -s "https://raw.githubusercontent.com/mopqpqua/oglog/master/config.sh" > "$script_dir/config.sh";
                     sleep 0.2;
                 else
                     echo $'Creating script specific folder in HOME/.config directory...\n\n';
@@ -58,6 +64,8 @@ function oglog_install() {
 
                     echo $'Downloading main oglog script from https://raw.githubusercontent.com/mopqpqua/oglog/master/oglog.sh...\n\n';
                     curl -s "https://raw.githubusercontent.com/mopqpqua/oglog/master/oglog.sh" > "$script_dir/oglog.sh";
+                    curl -s "https://raw.githubusercontent.com/mopqpqua/oglog/master/aliases.sh" > "$script_dir/aliases.sh";
+                    curl -s "https://raw.githubusercontent.com/mopqpqua/oglog/master/config.sh" > "$script_dir/config.sh";
                     sleep 0.2;
                 fi
             else
@@ -71,6 +79,8 @@ function oglog_install() {
 
                     echo $'Downloading main oglog script from https://raw.githubusercontent.com/mopqpqua/oglog/master/oglog.sh...\n\n';
                     curl -s "https://raw.githubusercontent.com/mopqpqua/oglog/master/oglog.sh" > "$script_dir/oglog.sh";
+                    curl -s "https://raw.githubusercontent.com/mopqpqua/oglog/master/aliases.sh" > "$script_dir/aliases.sh";
+                    curl -s "https://raw.githubusercontent.com/mopqpqua/oglog/master/config.sh" > "$script_dir/config.sh";
                     sleep 0.2;
                 else
                     echo $'Creating script specific folder in HOME directory...\n\n';
@@ -80,6 +90,8 @@ function oglog_install() {
 
                     echo $'Downloading main oglog script from https://raw.githubusercontent.com/mopqpqua/oglog/master/oglog.sh...\n\n';
                     curl -s "https://raw.githubusercontent.com/mopqpqua/oglog/master/oglog.sh" > "$script_dir/oglog.sh";
+                    curl -s "https://raw.githubusercontent.com/mopqpqua/oglog/master/aliases.sh" > "$script_dir/aliases.sh";
+                    curl -s "https://raw.githubusercontent.com/mopqpqua/oglog/master/config.sh" > "$script_dir/config.sh";}
                     sleep 0.2;
                 fi
             fi
@@ -107,8 +119,8 @@ function oglog_install() {
                         echo "" >> "$ZDOTDIR/.zshrc";
                         echo "# oglog script executing" >> "$ZDOTDIR/.zshrc";
                         echo "for f in $script_dir/*; do source "'$f'"; done" >> "$ZDOTDIR/.zshrc";
-                        echo "OGLOG_FOLDER=\"$script_dir\"" >> "$ZDOTDIR/.zshrc";
                         echo "" >> "$ZDOTDIR/.zshrc";
+                        echo "OGLOG_FOLDER=$script_dir" >> "$script_dir/config.sh";
 
                         source "$script_dir/oglog.sh";
                     fi
@@ -122,8 +134,8 @@ function oglog_install() {
                     echo "" >> "$ZDOTDIR/.zshrc";
                     echo "# oglog script executing" >> "$ZDOTDIR/.zshrc";
                     echo "for f in $script_dir/*; do source "'$f'"; done" >> "$ZDOTDIR/.zshrc";
-                    echo "OGLOG_FOLDER=$script_dir" >> "$ZDOTDIR/.zshrc";
                     echo "" >> "$ZDOTDIR/.zshrc";
+                    echo "OGLOG_FOLDER=$script_dir" >> "$script_dir/config.sh";
 
                     source "$script_dir/oglog.sh";
                 fi
@@ -141,8 +153,8 @@ function oglog_install() {
                         echo "" >> "$HOME/.zshrc";
                         echo "# oglog script executing" >> "$HOME/.zshrc";
                         echo "for f in $script_dir/*; do source "'$f'"; done" >> "$HOME/.zshrc";
-                        echo "OGLOG_FOLDER=$script_dir" >> "$HOME/.zshrc";
                         echo "" >> "$HOME/.zshrc";
+                        echo "OGLOG_FOLDER=$script_dir" >> "$script_dir/config.sh";
 
                         source "$script_dir/oglog.sh";
                     fi
@@ -156,8 +168,8 @@ function oglog_install() {
                     echo "" >> "$HOME/.zshrc";
                     echo "# oglog script executing" >> "$HOME/.zshrc";
                     echo "for f in $script_dir/*; do source "'$f'"; done" >> "$HOME/.zshrc";
-                    echo "OGLOG_FOLDER=$script_dir" >> "$HOME/.zshrc";
                     echo "" >> "$HOME/.zshrc";
+                    echo "OGLOG_FOLDER=$script_dir" >> "$script_dir/config.sh";
 
                     source "$script_dir/oglog.sh";
                 fi
@@ -174,8 +186,8 @@ function oglog_install() {
                 echo "" >> "$HOME/.bashrc";
                 echo "# oglog script executing and variables" >> "$HOME/.bashrc";
                 echo "for f in $script_dir/*; do source "'$f'"; done" >> "$HOME/.bashrc";
-                echo "OGLOG_FOLDER=$script_dir" >> "$HOME/.bashrc";
                 echo "" >> "$HOME/.bashrc";
+                echo "OGLOG_FOLDER=$script_dir" >> "$script_dir/config.sh";
 
                 source "$script_dir/oglog.sh";
             fi
