@@ -10,74 +10,77 @@ function oglog_install() {
         if [[ $XDG_CONFIG_HOME ]]
         then
             echo $'\n\nFound your XDG_CONFIG_HOME. Great job!\n\n';
-            sleep 0.3;
+            sleep 0.2;
 
             echo $'Check your XDG_CONFIG_HOME directory for necessary oglog folder...\n\n';
             if [[ -d "$XDG_CONFIG_HOME/.oglog" ]]
             then
                 echo $'Found it!\n\n';
-                echo $'Downloading main oglog script...\n\n';
-                curl -s "https://raw.githubusercontent.com/mopqpqua/oglog/master/oglog.sh" > "$XDG_CONFIG_HOME/.oglog/oglog.sh";
-                sleep 0.3;
                 script_dir="$XDG_CONFIG_HOME/.oglog";
+
+                echo $'Downloading main oglog script from https://raw.githubusercontent.com/mopqpqua/oglog/master/oglog.sh...\n\n';
+                curl -s "https://raw.githubusercontent.com/mopqpqua/oglog/master/oglog.sh" > "$script_dir/oglog.sh";
+                sleep 0.2;
             else
                 echo $'Creating script specific folder in XDG_CONFIG_HOME directory...\n\n';
                 mkdir "$XDG_CONFIG_HOME/.oglog";
-                sleep 0.3;
+                sleep 0.2;
                 script_dir="$XDG_CONFIG_HOME/.oglog";
 
-                echo $'Downloading main oglog script...\n\n';
+                echo $'Downloading main oglog script from https://raw.githubusercontent.com/mopqpqua/oglog/master/oglog.sh...\n\n';
                 curl -s "https://raw.githubusercontent.com/mopqpqua/oglog/master/oglog.sh" > "$script_dir/oglog.sh";
-                sleep 0.3;
+                sleep 0.2;
             fi
         else
             echo $'\n\nXDG_CONFIG_HOME not found.\nChecking your home directory for .config folder\n\n';
-            sleep 0.3;
+            sleep 0.2;
 
             if [[ -d "$HOME/.config" ]]
             then
                 echo $'Found it!\n\n';
-                sleep 0.3;
+                sleep 0.2;
 
                 echo $'Check your HOME/.config directory for necessary oglog folder...\n\n';
-                sleep 0.3;
+                sleep 0.2;
                 if [[ -d "$HOME/.config/.oglog" ]]
                 then
                     echo $'Found it!\n\n';
-                    echo $'Downloading main oglog script...\n\n';
-                    curl -s "https://raw.githubusercontent.com/mopqpqua/oglog/master/oglog.sh" > "$HOME/.config/.oglog/oglog.sh";
-                    sleep 0.3;
-                    script_dir="$HOME/.config/.oglog";
-                else
-                    echo $'Creating script specific folder in HOME/.config directory...\n\n';
-                    mkdir "$HOME/.config/.oglog";
-                    sleep 0.3;
                     script_dir="$HOME/.config/.oglog";
 
                     echo $'Downloading main oglog script from https://raw.githubusercontent.com/mopqpqua/oglog/master/oglog.sh...\n\n';
                     curl -s "https://raw.githubusercontent.com/mopqpqua/oglog/master/oglog.sh" > "$script_dir/oglog.sh";
-                    sleep 0.3;
+                    sleep 0.2;
+                else
+                    echo $'Creating script specific folder in HOME/.config directory...\n\n';
+                    mkdir "$HOME/.config/.oglog";
+                    sleep 0.2;
+                    script_dir="$HOME/.config/.oglog";
+
+                    echo $'Downloading main oglog script from https://raw.githubusercontent.com/mopqpqua/oglog/master/oglog.sh...\n\n';
+                    curl -s "https://raw.githubusercontent.com/mopqpqua/oglog/master/oglog.sh" > "$script_dir/oglog.sh";
+                    sleep 0.2;
                 fi
             else
                 echo $'Check your HOME directory for necessary oglog folder...\n\n';
-                sleep 0.3;
+                sleep 0.2;
 
                 if [[ -d "$HOME/.oglog" ]]
                 then
                     echo $'Found it!\n\n';
-                    echo $'Downloading main oglog script...\n\n';
-                    curl -s "https://raw.githubusercontent.com/mopqpqua/oglog/master/oglog.sh" > "$HOME/.oglog/oglog.sh";
-                    sleep 0.3;
-                    script_dir="$HOME/.oglog";
-                else
-                    echo $'Creating script specific folder in HOME directory...\n\n';
-                    mkdir "$HOME/.oglog";
-                    sleep 0.3;
                     script_dir="$HOME/.oglog";
 
                     echo $'Downloading main oglog script from https://raw.githubusercontent.com/mopqpqua/oglog/master/oglog.sh...\n\n';
                     curl -s "https://raw.githubusercontent.com/mopqpqua/oglog/master/oglog.sh" > "$script_dir/oglog.sh";
-                    sleep 0.3;
+                    sleep 0.2;
+                else
+                    echo $'Creating script specific folder in HOME directory...\n\n';
+                    mkdir "$HOME/.oglog";
+                    sleep 0.2;
+                    script_dir="$HOME/.oglog";
+
+                    echo $'Downloading main oglog script from https://raw.githubusercontent.com/mopqpqua/oglog/master/oglog.sh...\n\n';
+                    curl -s "https://raw.githubusercontent.com/mopqpqua/oglog/master/oglog.sh" > "$script_dir/oglog.sh";
+                    sleep 0.2;
                 fi
             fi
         fi
@@ -112,7 +115,7 @@ function oglog_install() {
                 else
                     echo $'.zshrc not found, lets create it in you ZDOTDIR!\n\n';
                     touch "$ZDOTDIR/.zshrc";
-                    sleep 0.3;
+                    sleep 0.2;
 
                     echo $'Add some oglog lines to ZDOTDIR/.zshrc...\n\n';
 
@@ -146,7 +149,7 @@ function oglog_install() {
                 else
                     echo $'.zshrc not found, lets create it in you HOME!\n\n';
                     touch "$HOME/.zshrc";
-                    sleep 0.3;
+                    sleep 0.2;
 
                     echo $'Add some oglog lines to HOME/.zshrc...\n\n';
 

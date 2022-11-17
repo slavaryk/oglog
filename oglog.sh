@@ -55,7 +55,7 @@ function oglog_handle_main_menu_choice() {
         echo $'\nI HUG YOU <3!\n';
         ;;
     $UPDATE)
-        eval "$(curl "https://raw.githubusercontent.com/mopqpqua/oglog/master/update.sh")" && oglog_update;
+        eval "$(curl -s "https://raw.githubusercontent.com/mopqpqua/oglog/master/update.sh")" && oglog_update;
         ;;
     $EXIT)
         echo $'\nGood bye!\n'
