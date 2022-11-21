@@ -120,7 +120,7 @@ function oglog_install() {
                         echo "# oglog script executing" >> "$ZDOTDIR/.zshrc";
                         echo "for f in $script_dir/*; do source "'$f'"; done" >> "$ZDOTDIR/.zshrc";
                         echo "" >> "$ZDOTDIR/.zshrc";
-                        echo "OGLOG_FOLDER=$script_dir" >> "$script_dir/config.sh";
+                        echo "OGLOG_FOLDER=\"$script_dir\"" >> "$script_dir/config.sh";
 
                         source "$script_dir/oglog.sh";
                     fi
@@ -135,7 +135,7 @@ function oglog_install() {
                     echo "# oglog script executing" >> "$ZDOTDIR/.zshrc";
                     echo "for f in $script_dir/*; do source "'$f'"; done" >> "$ZDOTDIR/.zshrc";
                     echo "" >> "$ZDOTDIR/.zshrc";
-                    echo "OGLOG_FOLDER=$script_dir" >> "$script_dir/config.sh";
+                    echo "OGLOG_FOLDER=\"$script_dir\"" >> "$script_dir/config.sh";
 
                     source "$script_dir/oglog.sh";
                 fi
@@ -154,7 +154,7 @@ function oglog_install() {
                         echo "# oglog script executing" >> "$HOME/.zshrc";
                         echo "for f in $script_dir/*; do source "'$f'"; done" >> "$HOME/.zshrc";
                         echo "" >> "$HOME/.zshrc";
-                        echo "OGLOG_FOLDER=$script_dir" >> "$script_dir/config.sh";
+                        echo "OGLOG_FOLDER=\"$script_dir\"" >> "$script_dir/config.sh";
 
                         source "$script_dir/oglog.sh";
                     fi
@@ -169,7 +169,7 @@ function oglog_install() {
                     echo "# oglog script executing" >> "$HOME/.zshrc";
                     echo "for f in $script_dir/*; do source "'$f'"; done" >> "$HOME/.zshrc";
                     echo "" >> "$HOME/.zshrc";
-                    echo "OGLOG_FOLDER=$script_dir" >> "$script_dir/config.sh";
+                    echo "OGLOG_FOLDER=\"$script_dir\"" >> "$script_dir/config.sh";
 
                     source "$script_dir/oglog.sh";
                 fi
@@ -187,7 +187,7 @@ function oglog_install() {
                 echo "# oglog script executing and variables" >> "$HOME/.bashrc";
                 echo "for f in $script_dir/*; do source "'$f'"; done" >> "$HOME/.bashrc";
                 echo "" >> "$HOME/.bashrc";
-                echo "OGLOG_FOLDER=$script_dir" >> "$script_dir/config.sh";
+                echo "OGLOG_FOLDER=\"$script_dir\"" >> "$script_dir/config.sh";
 
                 source "$script_dir/oglog.sh";
             fi
