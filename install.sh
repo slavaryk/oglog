@@ -91,7 +91,7 @@ function oglog_install() {
                     echo $'Downloading main oglog script from https://raw.githubusercontent.com/mopqpqua/oglog/master/oglog.sh...\n\n';
                     curl -s "https://raw.githubusercontent.com/mopqpqua/oglog/master/oglog.sh" > "$script_dir/oglog.sh";
                     curl -s "https://raw.githubusercontent.com/mopqpqua/oglog/master/aliases.sh" > "$script_dir/aliases.sh";
-                    curl -s "https://raw.githubusercontent.com/mopqpqua/oglog/master/config.sh" > "$script_dir/config.sh";}
+                    curl -s "https://raw.githubusercontent.com/mopqpqua/oglog/master/config.sh" > "$script_dir/config.sh";
                     sleep 0.2;
                 fi
             fi
