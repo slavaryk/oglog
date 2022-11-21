@@ -18,7 +18,7 @@ function oglog_install() {
                 echo $'Found it!\n\n';
                 script_dir="$XDG_CONFIG_HOME/.oglog";
 
-                echo $'Downloading main oglog script from https://raw.githubusercontent.com/mopqpqua/oglog/master/oglog.sh...\n\n';
+                echo $'Downloading main oglog scripts from https://raw.githubusercontent.com/mopqpqua/oglog/master/...\n\n';
                 curl -s "https://raw.githubusercontent.com/mopqpqua/oglog/master/oglog.sh" > "$script_dir/oglog.sh";
                 curl -s "https://raw.githubusercontent.com/mopqpqua/oglog/master/assets/aliases.sh" > "$script_dir/aliases.sh";
                 curl -s "https://raw.githubusercontent.com/mopqpqua/oglog/master/assets/config.sh" > "$script_dir/config.sh";
@@ -29,7 +29,7 @@ function oglog_install() {
                 sleep 0.2;
                 script_dir="$XDG_CONFIG_HOME/.oglog";
 
-                echo $'Downloading main oglog script from https://raw.githubusercontent.com/mopqpqua/oglog/master/oglog.sh...\n\n';
+                echo $'Downloading main oglog scripts from https://raw.githubusercontent.com/mopqpqua/oglog/master/...\n\n';
                 curl -s "https://raw.githubusercontent.com/mopqpqua/oglog/master/oglog.sh" > "$script_dir/oglog.sh";
                 curl -s "https://raw.githubusercontent.com/mopqpqua/oglog/master/assets/aliases.sh" > "$script_dir/aliases.sh";
                 curl -s "https://raw.githubusercontent.com/mopqpqua/oglog/master/assets/config.sh" > "$script_dir/config.sh";
@@ -51,7 +51,7 @@ function oglog_install() {
                     echo $'Found it!\n\n';
                     script_dir="$HOME/.config/.oglog";
 
-                    echo $'Downloading main oglog script from https://raw.githubusercontent.com/mopqpqua/oglog/master/oglog.sh...\n\n';
+                    echo $'Downloading main oglog scripts from https://raw.githubusercontent.com/mopqpqua/oglog/master/...\n\n';
                     curl -s "https://raw.githubusercontent.com/mopqpqua/oglog/master/oglog.sh" > "$script_dir/oglog.sh";
                     curl -s "https://raw.githubusercontent.com/mopqpqua/oglog/master/assets/aliases.sh" > "$script_dir/aliases.sh";
                     curl -s "https://raw.githubusercontent.com/mopqpqua/oglog/master/assets/config.sh" > "$script_dir/config.sh";
@@ -62,7 +62,7 @@ function oglog_install() {
                     sleep 0.2;
                     script_dir="$HOME/.config/.oglog";
 
-                    echo $'Downloading main oglog script from https://raw.githubusercontent.com/mopqpqua/oglog/master/oglog.sh...\n\n';
+                    echo $'Downloading main oglog scripts from https://raw.githubusercontent.com/mopqpqua/oglog/master/...\n\n';
                     curl -s "https://raw.githubusercontent.com/mopqpqua/oglog/master/oglog.sh" > "$script_dir/oglog.sh";
                     curl -s "https://raw.githubusercontent.com/mopqpqua/oglog/master/assets/aliases.sh" > "$script_dir/aliases.sh";
                     curl -s "https://raw.githubusercontent.com/mopqpqua/oglog/master/assets/config.sh" > "$script_dir/config.sh";
@@ -77,7 +77,7 @@ function oglog_install() {
                     echo $'Found it!\n\n';
                     script_dir="$HOME/.oglog";
 
-                    echo $'Downloading main oglog script from https://raw.githubusercontent.com/mopqpqua/oglog/master/oglog.sh...\n\n';
+                    echo $'Downloading main oglog scripts from https://raw.githubusercontent.com/mopqpqua/oglog/master/...\n\n';
                     curl -s "https://raw.githubusercontent.com/mopqpqua/oglog/master/oglog.sh" > "$script_dir/oglog.sh";
                     curl -s "https://raw.githubusercontent.com/mopqpqua/oglog/master/assets/aliases.sh" > "$script_dir/aliases.sh";
                     curl -s "https://raw.githubusercontent.com/mopqpqua/oglog/master/assets/config.sh" > "$script_dir/config.sh";
@@ -88,7 +88,7 @@ function oglog_install() {
                     sleep 0.2;
                     script_dir="$HOME/.oglog";
 
-                    echo $'Downloading main oglog script from https://raw.githubusercontent.com/mopqpqua/oglog/master/oglog.sh...\n\n';
+                    echo $'Downloading main oglog scripts from https://raw.githubusercontent.com/mopqpqua/oglog/master/...\n\n';
                     curl -s "https://raw.githubusercontent.com/mopqpqua/oglog/master/oglog.sh" > "$script_dir/oglog.sh";
                     curl -s "https://raw.githubusercontent.com/mopqpqua/oglog/master/assets/aliases.sh" > "$script_dir/aliases.sh";
                     curl -s "https://raw.githubusercontent.com/mopqpqua/oglog/master/assets/config.sh" > "$script_dir/config.sh";
