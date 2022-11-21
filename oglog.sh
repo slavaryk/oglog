@@ -257,16 +257,16 @@ function oglog_add_divider_to_piece() {
 
     case $MENU_CHOICE in
     "1")
-        echo $'--';
+        echo $' -- ';
         ;;
     "2")
-        echo $'->';
+        echo $' -> ';
         ;;
     "3")
-        echo $'_';
+        echo $' _ ';
         ;;
     "4")
-        echo $':';
+        echo $' : ';
         ;;
     "5")
         echo $' ';
