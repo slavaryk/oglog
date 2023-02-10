@@ -7,6 +7,10 @@ function oglog_install() {
 
     case $user_answer in
     "Y" | "y")
+        local main_script_url="https://raw.githubusercontent.com/mopqpqua/oglog/master/oglog.sh";
+        local aliases_url="https://raw.githubusercontent.com/mopqpqua/oglog/master/assets/aliases.sh";
+        local config_url="https://raw.githubusercontent.com/mopqpqua/oglog/master/assets/config.sh";
+
         if [[ $XDG_CONFIG_HOME ]]
         then
             echo $'\n\nFound your XDG_CONFIG_HOME. Great job!\n\n';
@@ -17,23 +21,11 @@ function oglog_install() {
             then
                 echo $'Found it!\n\n';
                 script_dir="$XDG_CONFIG_HOME/.oglog";
-
-                echo $'Downloading main oglog scripts from https://raw.githubusercontent.com/mopqpqua/oglog/master/...\n\n';
-                curl -s "https://raw.githubusercontent.com/mopqpqua/oglog/master/oglog.sh" > "$script_dir/oglog.sh";
-                curl -s "https://raw.githubusercontent.com/mopqpqua/oglog/master/assets/aliases.sh" > "$script_dir/aliases.sh";
-                curl -s "https://raw.githubusercontent.com/mopqpqua/oglog/master/assets/config.sh" > "$script_dir/config.sh";
-                sleep 0.2;
             else
                 echo $'Creating script specific folder in XDG_CONFIG_HOME directory...\n\n';
                 mkdir "$XDG_CONFIG_HOME/.oglog";
                 sleep 0.2;
                 script_dir="$XDG_CONFIG_HOME/.oglog";
-
-                echo $'Downloading main oglog scripts from https://raw.githubusercontent.com/mopqpqua/oglog/master/...\n\n';
-                curl -s "https://raw.githubusercontent.com/mopqpqua/oglog/master/oglog.sh" > "$script_dir/oglog.sh";
-                curl -s "https://raw.githubusercontent.com/mopqpqua/oglog/master/assets/aliases.sh" > "$script_dir/aliases.sh";
-                curl -s "https://raw.githubusercontent.com/mopqpqua/oglog/master/assets/config.sh" > "$script_dir/config.sh";
-                sleep 0.2;
             fi
         else
             echo $'\n\nXDG_CONFIG_HOME not found.\nChecking your home directory for .config folder\n\n';
@@ -50,23 +42,11 @@ function oglog_install() {
                 then
                     echo $'Found it!\n\n';
                     script_dir="$HOME/.config/.oglog";
-
-                    echo $'Downloading main oglog scripts from https://raw.githubusercontent.com/mopqpqua/oglog/master/...\n\n';
-                    curl -s "https://raw.githubusercontent.com/mopqpqua/oglog/master/oglog.sh" > "$script_dir/oglog.sh";
-                    curl -s "https://raw.githubusercontent.com/mopqpqua/oglog/master/assets/aliases.sh" > "$script_dir/aliases.sh";
-                    curl -s "https://raw.githubusercontent.com/mopqpqua/oglog/master/assets/config.sh" > "$script_dir/config.sh";
-                    sleep 0.2;
                 else
                     echo $'Creating script specific folder in HOME/.config directory...\n\n';
                     mkdir "$HOME/.config/.oglog";
                     sleep 0.2;
                     script_dir="$HOME/.config/.oglog";
-
-                    echo $'Downloading main oglog scripts from https://raw.githubusercontent.com/mopqpqua/oglog/master/...\n\n';
-                    curl -s "https://raw.githubusercontent.com/mopqpqua/oglog/master/oglog.sh" > "$script_dir/oglog.sh";
-                    curl -s "https://raw.githubusercontent.com/mopqpqua/oglog/master/assets/aliases.sh" > "$script_dir/aliases.sh";
-                    curl -s "https://raw.githubusercontent.com/mopqpqua/oglog/master/assets/config.sh" > "$script_dir/config.sh";
-                    sleep 0.2;
                 fi
             else
                 echo $'Check your HOME directory for necessary oglog folder...\n\n';
@@ -76,23 +56,11 @@ function oglog_install() {
                 then
                     echo $'Found it!\n\n';
                     script_dir="$HOME/.oglog";
-
-                    echo $'Downloading main oglog scripts from https://raw.githubusercontent.com/mopqpqua/oglog/master/...\n\n';
-                    curl -s "https://raw.githubusercontent.com/mopqpqua/oglog/master/oglog.sh" > "$script_dir/oglog.sh";
-                    curl -s "https://raw.githubusercontent.com/mopqpqua/oglog/master/assets/aliases.sh" > "$script_dir/aliases.sh";
-                    curl -s "https://raw.githubusercontent.com/mopqpqua/oglog/master/assets/config.sh" > "$script_dir/config.sh";
-                    sleep 0.2;
                 else
                     echo $'Creating script specific folder in HOME directory...\n\n';
                     mkdir "$HOME/.oglog";
                     sleep 0.2;
                     script_dir="$HOME/.oglog";
-
-                    echo $'Downloading main oglog scripts from https://raw.githubusercontent.com/mopqpqua/oglog/master/...\n\n';
-                    curl -s "https://raw.githubusercontent.com/mopqpqua/oglog/master/oglog.sh" > "$script_dir/oglog.sh";
-                    curl -s "https://raw.githubusercontent.com/mopqpqua/oglog/master/assets/aliases.sh" > "$script_dir/aliases.sh";
-                    curl -s "https://raw.githubusercontent.com/mopqpqua/oglog/master/assets/config.sh" > "$script_dir/config.sh";
-                    sleep 0.2;
                 fi
             fi
         fi
@@ -193,6 +161,11 @@ function oglog_install() {
             fi
             ;;
         esac
+
+        echo $'Downloading main oglog scripts from https://raw.githubusercontent.com/mopqpqua/oglog/master/...\n\n';
+        curl -s $main_script_url > "$script_dir/oglog.sh";
+        curl -s $aliases_url > "$script_dir/aliases.sh";
+        curl -s $config_url > "$script_dir/config.sh";
         ;;
     "N" | "n")
         echo "All right :c";
