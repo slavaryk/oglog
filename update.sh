@@ -12,5 +12,6 @@ function oglog_update() {
         for f in $OGLOG_FOLDER/*; do source "$f"; done
     else
         echo -e "$RED ERROR$RESTORE: OGLOG_FOLDER not found. You may need to reinstall oglog manually.";
+        echo "Visit https://github.com/mopqpqua/oglog";
     fi
 }
