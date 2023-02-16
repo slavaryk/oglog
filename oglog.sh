@@ -10,9 +10,9 @@ function oglog() {
 
     while [ "$MENU_CHOICE" != "$EXIT" ];
         do
-            oglog_show_main_menu;
-            MENU_CHOICE=$(oglog_read_user_input);
-            oglog_handle_main_menu_choice $MENU_CHOICE;
+            __oglog_show_main_menu;
+            MENU_CHOICE=$(__oglog_read_user_input);
+            __oglog_handle_main_menu_choice $MENU_CHOICE;
         done
 
     unset GIT_LOG_ALIAS;
@@ -22,18 +22,18 @@ function oglog() {
     unset MENU_CHOICE;
 }
 
-function oglog_read_user_input() {
+function __oglog_read_user_input() {
     read user_input;
     echo "$user_input";
 }
 
-function oglog_print_divider() {
+function __oglog_print_divider() {
     echo $'\n-----------------------\n';
 }
 
-function oglog_show_main_menu() {
+function __oglog_show_main_menu() {
     echo $'\_/_/_/_/ Choose an option and hit enter: \_/_/_/_/';
-    oglog_print_divider;
+    __oglog_print_divider;
     echo $'1. Add new git log alias';
     echo $'2. Take a hug!';
     echo $'3. Update';
@@ -41,7 +41,7 @@ function oglog_show_main_menu() {
     echo $'\nTell me what you want, what you realy realy want?\n';
 }
 
-function oglog_handle_main_menu_choice() {
+function __oglog_handle_main_menu_choice() {
     local ALIAS_ADDING=1;
     local HUG=2;
     local UPDATE=3;
@@ -49,13 +49,13 @@ function oglog_handle_main_menu_choice() {
 
     case $1 in
     $ALIAS_ADDING)
-        oglog_build_git_log_alias;
+        __oglog_build_git_log_alias;
         ;;
     $HUG)
         echo $'\nI HUG YOU <3!\n';
         ;;
     $UPDATE)
-        eval "$(curl -s "https://raw.githubusercontent.com/mopqpqua/oglog/master/update.sh")" && oglog_update;
+        eval "$(curl -s "https://raw.githubusercontent.com/mopqpqua/oglog/master/update.sh")" && __oglog_update;
         ;;
     $EXIT)
         echo $'\nGood bye!\n'
@@ -65,27 +65,27 @@ function oglog_handle_main_menu_choice() {
     esac
 }
 
-function oglog_build_git_log_alias() {
+function __oglog_build_git_log_alias() {
     local MENU_CHOICE="";
 
     while [ "$MENU_CHOICE" != "s" ] && [ "$MENU_CHOICE" != "S" ];
         do
-            oglog_show_pieces_menu;
-            MENU_CHOICE=$(oglog_read_user_input);
-            oglog_handle_piece_choice $MENU_CHOICE;
+            __oglog_show_pieces_menu;
+            MENU_CHOICE=$(__oglog_read_user_input);
+            __oglog_handle_piece_choice $MENU_CHOICE;
         done
 
     echo $'\nName your alias!\n';
     GIT_LOG_ALIAS="git log --pretty=format:\"$GIT_LOG_ALIAS_VALUE\"";
-    alias "$(oglog_add_alias_name)=$GIT_LOG_ALIAS";
+    alias "$(__oglog_add_alias_name)=$GIT_LOG_ALIAS";
 }
 
-function oglog_show_pieces_menu() {
+function __oglog_show_pieces_menu() {
     local WHITE="\033[01;37m";
     local RESTORE="\033[0m";
 
     echo $'\nWhat you want to see in your git log?';
-    oglog_print_divider;
+    __oglog_print_divider;
     echo -e "$WHITE Commits: $RESTORE";
     echo $'1. Commit hash';
     echo $'2. Tree hash';
@@ -113,58 +113,58 @@ function oglog_show_pieces_menu() {
     echo $'\ns/S -> Save';
 }
 
-function oglog_handle_piece_choice() {
+function __oglog_handle_piece_choice() {
     case $1 in
     "1")
-        oglog_build_alias_piece "%h";
+        __oglog_build_alias_piece "%h";
         ;;
     "2")
-        oglog_build_alias_piece "%t";
+        __oglog_build_alias_piece "%t";
         ;;
     "3")
-        oglog_build_alias_piece "%p";
+        __oglog_build_alias_piece "%p";
         ;;
     "4")
-        oglog_build_alias_piece "%an";
+        __oglog_build_alias_piece "%an";
         ;;
     "5")
-        oglog_build_alias_piece "%ae";
+        __oglog_build_alias_piece "%ae";
         ;;
     "6")
-        oglog_build_alias_piece "%ad";
+        __oglog_build_alias_piece "%ad";
         ;;
     "7")
-        oglog_build_alias_piece "%ar";
+        __oglog_build_alias_piece "%ar";
         ;;
     "8")
-        oglog_build_alias_piece "%cn";
+        __oglog_build_alias_piece "%cn";
         ;;
     "9")
-        oglog_build_alias_piece "%ce";
+        __oglog_build_alias_piece "%ce";
         ;;
     "10")
-        oglog_build_alias_piece "%cd";
+        __oglog_build_alias_piece "%cd";
         ;;
     "11")
-        oglog_build_alias_piece "%cr";
+        __oglog_build_alias_piece "%cr";
         ;;
     "12")
-        oglog_build_alias_piece "%s";
+        __oglog_build_alias_piece "%s";
         ;;
     "13")
-        oglog_build_alias_piece "%b";
+        __oglog_build_alias_piece "%b";
         ;;
     "14")
-        oglog_build_alias_piece "%B";
+        __oglog_build_alias_piece "%B";
         ;;
     "15")
-        oglog_build_alias_piece "%N";
+        __oglog_build_alias_piece "%N";
         ;;
     "16")
-        oglog_build_alias_piece "%d";
+        __oglog_build_alias_piece "%d";
         ;;
     "17")
-        oglog_build_alias_piece "%D";
+        __oglog_build_alias_piece "%D";
         ;;
     "s" | "S")
         echo $'Okay!';
@@ -175,19 +175,19 @@ function oglog_handle_piece_choice() {
     esac
 }
 
-function oglog_build_alias_piece() {
-    oglog_show_color_menu;
-    GIT_LOG_ALIAS_PIECE="$(oglog_add_color_to_piece)$1";
+function __oglog_build_alias_piece() {
+    __oglog_show_color_menu;
+    GIT_LOG_ALIAS_PIECE="$(__oglog_add_color_to_piece)$1";
 
-    oglog_show_dividers_menu;
-    GIT_LOG_ALIAS_PIECE="$GIT_LOG_ALIAS_PIECE$(oglog_add_divider_to_piece)";
+    __oglog_show_dividers_menu;
+    GIT_LOG_ALIAS_PIECE="$GIT_LOG_ALIAS_PIECE$(__oglog_add_divider_to_piece)";
 
     GIT_LOG_ALIAS_VALUE+="$GIT_LOG_ALIAS_PIECE";
     GIT_LOG_ALIAS_PIECE="";
     echo "$GIT_LOG_ALIAS_VALUE";
 }
 
-function oglog_show_color_menu() {
+function __oglog_show_color_menu() {
     local RESTORE="\033[0m";
     local RED="\033[00;31m";
     local GREEN="\033[00;32m";
@@ -198,7 +198,7 @@ function oglog_show_color_menu() {
     local WHITE="\033[01;37m";
 
     echo $'\nWhat color?'
-    oglog_print_divider;
+    __oglog_print_divider;
     echo -e "1. $RED RED$RESTORE";
     echo -e "2. $GREEN GREEN$RESTORE";
     echo -e "3. $YELLOW YELLOW$RESTORE";
@@ -209,8 +209,8 @@ function oglog_show_color_menu() {
     echo -e "$RESTORE"
 }
 
-function oglog_add_color_to_piece() {
-    MENU_CHOICE="$(oglog_read_user_input)";
+function __oglog_add_color_to_piece() {
+    MENU_CHOICE="$(__oglog_read_user_input)";
 
     case $MENU_CHOICE in
     "1")
@@ -240,7 +240,7 @@ function oglog_add_color_to_piece() {
     esac
 }
 
-function oglog_show_dividers_menu() {
+function __oglog_show_dividers_menu() {
     echo $'\nWhat divider?\n';
     echo $'You can write your variant!\n';
     echo "1. --";
@@ -252,8 +252,8 @@ function oglog_show_dividers_menu() {
     echo "7. none";
 }
 
-function oglog_add_divider_to_piece() {
-    MENU_CHOICE="$(oglog_read_user_input)";
+function __oglog_add_divider_to_piece() {
+    MENU_CHOICE="$(__oglog_read_user_input)";
 
     case $MENU_CHOICE in
     "1")
@@ -283,8 +283,8 @@ function oglog_add_divider_to_piece() {
     esac
 }
 
-function oglog_add_alias_name() {
-    ALIAS_NAME=$(oglog_read_user_input);
+function __oglog_add_alias_name() {
+    ALIAS_NAME=$(__oglog_read_user_input);
     echo "$ALIAS_NAME";
 }
 
