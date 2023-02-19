@@ -65,11 +65,11 @@ function oglog_install() {
             fi
         fi
 
-        echo $'Are you using zsh or bash, pardner?\nType "z/Z" if zsh or b/B if bash';
-        read user_answer;
+        # https://unix.stackexchange.com/a/120138
+        local current_cl=$(ps -p$$ -o cmd="",comm="",fname="" 2>/dev/null | sed 's/^-//' | grep -oE '\w+' | head -n1);
 
-        case $user_answer in
-        "z" | "Z")
+        case $current_cl in
+        "zsh")
             echo $'Check if youre using ZDOTDIR\n\n';
             if [[ $ZDOTDIR ]]
             then
@@ -143,7 +143,7 @@ function oglog_install() {
                 fi
             fi
             ;;
-        "b" | "B")
+        "bash")
             echo $'Checking lines in HOME/.bashrc\n\n';
             if grep -qF "for f in $script_dir/*; do source "'$f'"; done" $HOME/.bashrc;
             then
