@@ -89,8 +89,6 @@ function oglog_install() {
                         echo "for f in $script_dir/*; do source "'$f'"; done" >> "$ZDOTDIR/.zshrc";
                         echo "" >> "$ZDOTDIR/.zshrc";
                         echo "OGLOG_FOLDER=\"$script_dir\"" >> "$script_dir/config.sh";
-
-                        source "$script_dir/oglog.sh";
                     fi
                 else
                     echo $'.zshrc not found, lets create it in you ZDOTDIR!\n\n';
@@ -104,8 +102,6 @@ function oglog_install() {
                     echo "for f in $script_dir/*; do source "'$f'"; done" >> "$ZDOTDIR/.zshrc";
                     echo "" >> "$ZDOTDIR/.zshrc";
                     echo "OGLOG_FOLDER=\"$script_dir\"" >> "$script_dir/config.sh";
-
-                    source "$script_dir/oglog.sh";
                 fi
             else
                 echo $'ZDOTDIR not found...\n\n';
@@ -123,8 +119,6 @@ function oglog_install() {
                         echo "for f in $script_dir/*; do source "'$f'"; done" >> "$HOME/.zshrc";
                         echo "" >> "$HOME/.zshrc";
                         echo "OGLOG_FOLDER=\"$script_dir\"" >> "$script_dir/config.sh";
-
-                        source "$script_dir/oglog.sh";
                     fi
                 else
                     echo $'.zshrc not found, lets create it in you HOME!\n\n';
@@ -138,8 +132,6 @@ function oglog_install() {
                     echo "for f in $script_dir/*; do source "'$f'"; done" >> "$HOME/.zshrc";
                     echo "" >> "$HOME/.zshrc";
                     echo "OGLOG_FOLDER=\"$script_dir\"" >> "$script_dir/config.sh";
-
-                    source "$script_dir/oglog.sh";
                 fi
             fi
             ;;
@@ -156,8 +148,6 @@ function oglog_install() {
                 echo "for f in $script_dir/*; do source "'$f'"; done" >> "$HOME/.bashrc";
                 echo "" >> "$HOME/.bashrc";
                 echo "OGLOG_FOLDER=\"$script_dir\"" >> "$script_dir/config.sh";
-
-                source "$script_dir/oglog.sh";
             fi
             ;;
         esac
@@ -166,6 +156,7 @@ function oglog_install() {
         curl -s $main_script_url > "$script_dir/oglog.sh";
         curl -s $aliases_url > "$script_dir/aliases.sh";
         curl -s $config_url > "$script_dir/config.sh";
+        source "$script_dir/oglog.sh";
         ;;
     "N" | "n")
         echo "All right :c";
