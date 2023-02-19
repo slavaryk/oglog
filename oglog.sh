@@ -287,9 +287,3 @@ function __oglog_add_alias_name() {
     ALIAS_NAME=$(__oglog_read_user_input);
     echo "$ALIAS_NAME";
 }
-
-unset GIT_LOG_ALIAS;
-unset GIT_LOG_ALIAS_VALUE;
-unset GIT_LOG_ALIAS_PIECE;
-unset ALIAS_NAME;
-unset MENU_CHOICE;
