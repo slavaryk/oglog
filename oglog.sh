@@ -283,6 +283,17 @@ function __oglog_add_divider_to_piece() {
     esac
 }
 
+function __oglog_show_options_menu() {
+    local WHITE="\033[01;37m";
+    local RESTORE="\033[0m";
+
+    echo -e "$WHITE Other options: $RESTORE";
+    echo $'1. Graph view (with * and lines)';
+    echo $'2. No merge commits';
+    echo $'3. Only merge commits';
+    echo $'4. First-Parent view (gives a better way to look at evolution of topic branches)';
+}
+
 function __oglog_add_alias_name() {
     ALIAS_NAME=$(__oglog_read_user_input);
     echo "$ALIAS_NAME";
