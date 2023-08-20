@@ -10,7 +10,7 @@ function oglog_install() {
     local config_location="";
 
     function __oglog_add_folder() {
-        echo $'Creating script specific folder in';
+        echo $'Creating script specific folder';
         echo "$script_dir";
         echo $'\n';
         mkdir "$script_dir";
@@ -23,6 +23,11 @@ function oglog_install() {
         echo "" >> "$config_location";
     }
 
+    function __oglog_backup_config_file() {
+        echo "Your shell config file will be backuped in same directory as $config_location!";
+        cp "$config_location" "${config_location}_buckup$(date +%Y-%m-%d)";
+    }
+
     function __oglog_resolve_config_location_and_add_script() {
         case $current_cl in
         "zsh")
@@ -31,11 +36,13 @@ function oglog_install() {
             if [[ "$config_location" != "" ]]
             then
                 echo $'Checking lines in .zshrc\n';
+                grep -qF "for f in $script_dir/*; do source "'$f'"; done" "$config_location";
                 if grep -qF "for f in $script_dir/*; do source "'$f'"; done" "$config_location";
                 then
                     echo $'Execution scripts already exists\n';
                 else
                     echo $'Add some oglog lines to .zshrc...\n';
+                    __oglog_backup_config_file;
                     __oglog_add_script;
                 fi
             else
@@ -58,6 +65,7 @@ function oglog_install() {
                     echo $'Execution scripts already exists\n';
                 else
                     echo $'Add some oglog lines to .bashrc...\n';
+                    # __oglog_backup_config_file;
                     __oglog_add_script;
                 fi
             else
