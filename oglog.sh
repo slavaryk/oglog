@@ -77,7 +77,9 @@ function __oglog_build_git_log_alias() {
 
     echo $'\nName your alias!\n';
     GIT_LOG_ALIAS="git log --pretty=format:\"$GIT_LOG_ALIAS_VALUE\"";
-    alias "$(__oglog_add_alias_name)=$GIT_LOG_ALIAS";
+    local alias_command="$(__oglog_add_alias_name)='$GIT_LOG_ALIAS'";
+    echo "alias $alias_command" >> "$OGLOG_FOLDER/aliases.sh";
+    source "$OGLOG_FOLDER/aliases.sh";
 }
 
 function __oglog_show_pieces_menu() {
@@ -115,63 +117,44 @@ function __oglog_show_pieces_menu() {
 
 function __oglog_handle_piece_choice() {
     case $1 in
-    "1")
-        __oglog_build_alias_piece "%h";
-        ;;
-    "2")
-        __oglog_build_alias_piece "%t";
-        ;;
-    "3")
-        __oglog_build_alias_piece "%p";
-        ;;
-    "4")
-        __oglog_build_alias_piece "%an";
-        ;;
-    "5")
-        __oglog_build_alias_piece "%ae";
-        ;;
-    "6")
-        __oglog_build_alias_piece "%ad";
-        ;;
-    "7")
-        __oglog_build_alias_piece "%ar";
-        ;;
-    "8")
-        __oglog_build_alias_piece "%cn";
-        ;;
-    "9")
-        __oglog_build_alias_piece "%ce";
-        ;;
-    "10")
-        __oglog_build_alias_piece "%cd";
-        ;;
-    "11")
-        __oglog_build_alias_piece "%cr";
-        ;;
-    "12")
-        __oglog_build_alias_piece "%s";
-        ;;
-    "13")
-        __oglog_build_alias_piece "%b";
-        ;;
-    "14")
-        __oglog_build_alias_piece "%B";
-        ;;
-    "15")
-        __oglog_build_alias_piece "%N";
-        ;;
-    "16")
-        __oglog_build_alias_piece "%d";
-        ;;
-    "17")
-        __oglog_build_alias_piece "%D";
-        ;;
-    "s" | "S")
-        echo $'Okay!';
-        ;;
-    *)
-        echo $'\nMaybe try again?\n';
-        ;;
+    "1") __oglog_build_alias_piece "%h";
+    ;;
+    "2") __oglog_build_alias_piece "%t";
+    ;;
+    "3") __oglog_build_alias_piece "%p";
+    ;;
+    "4") __oglog_build_alias_piece "%an";
+    ;;
+    "5") __oglog_build_alias_piece "%ae";
+    ;;
+    "6") __oglog_build_alias_piece "%ad";
+    ;;
+    "7") __oglog_build_alias_piece "%ar";
+    ;;
+    "8") __oglog_build_alias_piece "%cn";
+    ;;
+    "9") __oglog_build_alias_piece "%ce";
+    ;;
+    "10") __oglog_build_alias_piece "%cd";
+    ;;
+    "11") __oglog_build_alias_piece "%cr";
+    ;;
+    "12") __oglog_build_alias_piece "%s";
+    ;;
+    "13") __oglog_build_alias_piece "%b";
+    ;;
+    "14") __oglog_build_alias_piece "%B";
+    ;;
+    "15") __oglog_build_alias_piece "%N";
+    ;;
+    "16") __oglog_build_alias_piece "%d";
+    ;;
+    "17") __oglog_build_alias_piece "%D";
+    ;;
+    "s" | "S") echo $'Okay!';
+    ;;
+    *) echo $'\nMaybe try again?\n';
+    ;;
     esac
 }
 
@@ -213,30 +196,22 @@ function __oglog_add_color_to_piece() {
     MENU_CHOICE="$(__oglog_read_user_input)";
 
     case $MENU_CHOICE in
-    "1")
-        echo "%C(red)";
-        ;;
-    "2")
-        echo "%C(green)";
-        ;;
-    "3")
-        echo "%C(yellow)";
-        ;;
-    "4")
-        echo "%C(blue)";
-        ;;
-    "5")
-        echo "%C(cyan)";
-        ;;
-    "6")
-        echo "%C(magenta)";
-        ;;
-    "7")
-        echo "%C(white)";
-        ;;
-    *)
-        echo $'I don\'t know this color :(';
-        ;;
+    "1") echo "%C(red)";
+    ;;
+    "2") echo "%C(green)";
+    ;;
+    "3") echo "%C(yellow)";
+    ;;
+    "4") echo "%C(blue)";
+    ;;
+    "5") echo "%C(cyan)";
+    ;;
+    "6") echo "%C(magenta)";
+    ;;
+    "7") echo "%C(white)";
+    ;;
+    *) echo $'I don\'t know this color :(';
+    ;;
     esac
 }
 
@@ -256,30 +231,22 @@ function __oglog_add_divider_to_piece() {
     MENU_CHOICE="$(__oglog_read_user_input)";
 
     case $MENU_CHOICE in
-    "1")
-        echo $' -- ';
-        ;;
-    "2")
-        echo $' -> ';
-        ;;
-    "3")
-        echo $' _ ';
-        ;;
-    "4")
-        echo $' : ';
-        ;;
-    "5")
-        echo $' ';
-        ;;
-    "6")
-        echo "%n";
-        ;;
-    "7")
-        echo "";
-        ;;
-    *)
-        echo "$MENU_CHOICE";
-        ;;
+    "1") echo $' -- ';
+    ;;
+    "2") echo $' -> ';
+    ;;
+    "3") echo $' _ ';
+    ;;
+    "4") echo $' : ';
+    ;;
+    "5") echo $' ';
+    ;;
+    "6") echo "%n";
+    ;;
+    "7") echo "";
+    ;;
+    *) echo "$MENU_CHOICE";
+    ;;
     esac
 }
 
