@@ -217,7 +217,7 @@ function __oglog_add_color_to_piece() {
 
 function __oglog_show_dividers_menu() {
     echo $'\nWhat divider?\n';
-    echo $'You can write your variant!\n';
+    echo $'You can write your variant!\n Just type it and hit enter (even with empty string).';
     echo "1. --";
     echo "2. ->";
     echo "3. _";
