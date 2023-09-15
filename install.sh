@@ -25,7 +25,7 @@ function oglog_install() {
 
     function __oglog_backup_config_file() {
         echo "Your shell config file will be backuped in same directory as $config_location!";
-        cp "$config_location" "${config_location}_buckup$(date +%Y-%m-%d)";
+        cp "$config_location" "${config_location}_backup$(date +%Y-%m-%d)";
     }
 
     function __oglog_resolve_config_location_and_add_script() {
