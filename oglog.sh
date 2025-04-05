@@ -49,6 +49,11 @@ function __oglog_handle_main_menu_choice() {
 
     case $1 in
     $ALIAS_ADDING)
+	echo "Now you can choose what you wanna see in your git log.";
+	echo "You will be prompted to construct a pieces of log.";
+	echo "Once a piece done, you save it and then you can constract next piece.";
+	echo "Once you satisfied with all pieces, you save you log by adding an alias for it";
+	echo "Dont't worry, oglog tries not to pollute users home directory, and will store aliases in separate folder!";
         __oglog_build_git_log_alias;
         ;;
     $HUG)
@@ -73,6 +78,13 @@ function __oglog_build_git_log_alias() {
             __oglog_show_pieces_menu;
             MENU_CHOICE=$(__oglog_read_user_input);
             __oglog_handle_piece_choice $MENU_CHOICE;
+        done
+
+    while [ "$MENU_CHOICE" != "" ]
+        do
+            echo $'Maybe you want to add an extra option to your log?';
+            MENU_CHOICE=$(__oglog_read_user_input);
+            # TODO: add option choice handling function
         done
 
     echo $'\nName your alias!\n';
@@ -210,8 +222,6 @@ function __oglog_add_color_to_piece() {
     ;;
     "7") echo "%C(white)";
     ;;
-    *) echo $'I don\'t know this color :(';
-    ;;
     esac
 }
 
@@ -255,10 +265,25 @@ function __oglog_show_options_menu() {
     local RESTORE="\033[0m";
 
     echo -e "$WHITE Other options: $RESTORE";
-    echo $'1. Graph view (with * and lines)';
-    echo $'2. No merge commits';
-    echo $'3. Only merge commits';
-    echo $'4. First-Parent view (gives a better way to look at evolution of topic branches)';
+    echo $'1. No merge commits';
+    echo $'2. Only merge commits';
+    echo $'3. First-Parent view (gives a better way to look at evolution of topic branches)';
+    echo $'4. Graph view';
+}
+
+function __oglog_add_option_to_peice() {
+    MENU_CHOICE="$(__oglog_read_user_input)";
+
+    case $MENU_CHOICE in
+    "1") echo "--no-merges";
+    ;;
+    "2") echo "--merges";
+    ;;
+    "3") echo "--first-parent";
+    ;;
+    "4") echo "--graph";
+    ;;
+    esac
 }
 
 function __oglog_add_alias_name() {
